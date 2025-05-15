@@ -1,0 +1,102 @@
+.hero-section {
+    background-image: url('./pexels-823sl-2294361.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    
+  }
+  
+
+  .product {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+
+  .satoshi-bold {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+  }
+
+  .ranade-bold{
+    font-family: 'Ranade', sans-serif;
+    font-weight: 800;
+  }
+
+  .ayush>div>img{
+    min-width: 30px;
+    height: auto;
+    margin-right: 2rem;
+    
+  }
+
+  .ayush>div{
+    margin-top: 40px;
+  }
+
+  .ayush>div>p{
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    margin-top: 17px;
+    font-size: larger;
+  }
+
+
+  .pro>div>img{
+   width: 300px;
+   height: 300px;
+  }
+
+
+  .fontstyle{
+    
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: larger;
+  }
+
+  .ayush>div{
+    transition: transform 0.5s ease-in-out ;
+  }
+
+  .ayush>div:hover{
+    transform: scale(1.1);
+
+  }
+
+a{
+  text-decoration: none;
+  color: black;
+  
+}
+
+a:hover {
+  color: rgb(249, 249, 249);
+}
+
+.area1{
+  width: 95%;
+  
+}
+
+
+.price{
+
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: larger;
+}
+
+
+
+.cake{
+  font-weight: 700;
+  font-family: sans-serif;
+  
+}
+
+.back:hover{
+  color: black;
+}
