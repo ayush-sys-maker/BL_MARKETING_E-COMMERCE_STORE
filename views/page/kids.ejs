@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIDS | BL MARKETING</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@301&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="homecss.css"> 
+
+<style>
+
+.footercontent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    background-color: #f8f9fa;
+    
+    margin-left: -20px;
+  }
+
+ 
+  .footermedia{
+ position: relative;
+ left: 210px;
+ top: 30px;
+  }
+  .footermedia>div>a>i{
+    font-size: 1.5rem;
+  }
+  .footerinventory{
+    margin-top: 25px;
+    
+  }
+  .footermore{
+    margin-top: 30px;
+    
+  }
+
+
+  /*navbar css*/
+
+/* General font */
+body {
+  font-family: 'Satoshi', sans-serif;
+}
+
+/* Logo */
+.navbar-brand > img {
+  width: 100px;
+  height: 100px;
+}
+
+/* Navbar height for desktop */
+@media (min-width: 992px) {
+  .navbar .d-flex {
+    margin-left: 250px;
+  }
+  .navbar form {
+    margin-left: 3rem;
+  }
+  .navbar {
+    height: 60px;
+  }
+}
+
+/* Search input */
+.form-control {
+  width: 600px;
+}
+
+/* ===== MOBILE STYLES ===== */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    padding-top: 1rem;
+  }
+
+  /* Search box full width */
+  .navbar form {
+    margin-left: 0 !important;
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  /* Align buttons on mobile */
+  .navbar .d-flex {
+    margin-left: 0 !important;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  /* Adjust navbar spacing */
+  .navbarcontent {
+    margin-top: -20px;
+  }
+
+  .navbar-brand {
+    height: 80px;
+  }
+
+  .navbar-brand > img {
+    height: 100px;
+  }
+
+  .navbar-toggler {
+    margin-top: 20px;
+  }
+}
+       
+
+</style>
+
+
+</head>
+<body>
+    
+
+  
+<!--NAVBAR--> 
+<header class="sticky-top bg-white shadow-sm">
+  <nav class="navbar navbar-expand-lg container ">
+    <div class="container-fluid  navbarcontent   ">
+      <!-- Logo/Brand -->
+      <div class="navbar-brand " href="#">  <img class="img-fluid" src="Bl_logo.png" alt="Bl_logo"></div>
+      
+      <!-- Mobile Toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- Main Content -->
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <!-- Menu -->
+        <ul class="navbar-nav gap-lg-4 gap-2 ms-lg-5 ps-lg-5  mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/MEN">Men</a></li>
+          <li class="nav-item"><a class="nav-link" href="/WOMEN">Women</a></li>
+          <li class="nav-item"><a class="nav-link" href="/KIDS">Kids</a></li>
+        </ul>
+        
+        <!-- Search -->
+        <form class="d-flex ms-lg-5 me-lg-0 mx-auto my-2 my-lg-0" role="search"  action="/search" method="get"  >
+          <div class="input-group   ">
+            <input class="form-control" type="search" placeholder="Search" name="q">
+            <button class="btn btn-outline-secondary" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+        
+        <!-- Actions -->
+        <div class="d-flex gap-2 align-items-center ms-lg-5">
+        
+        
+       
+
+
+<!-- Cart button -->
+
+
+ <% if(!user){ %>
+  <!-- Login button -->
+  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signInModal">
+    Sign In
+  </button>
+  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+   Login
+  </button>
+  <% }else{ %>
+    <button  class="btn btn-primary  rounded-pill" onclick="window.location.href='/order/my-orders'" style="font-size: small;"  >MY ORDER</button>
+
+  <form action="/auth/logout" method="post">
+  <button type="submit" class="btn fs-6 " >
+   <i class="fas fa-sign-out-alt"></i>
+  </button>
+
+  </form>
+  <% } %>
+  <button class="btn position-relative p-1">
+    <a href="/cart"><i class="fas fa-shopping-cart fs-5"></i></a>
+   </button>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!--Products-->
+
+
+
+
+
+
+
+<!--WOMEN-->
+
+<section>
+  <div class="pro container-fluid justify-content-center mt-5 px-2 px-md-4">
+    <div class="row g-3">
+      <% feature.forEach(product => { %>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+          <div class="product-card h-100 p-3 border rounded" onclick="window.location.href='/products/KIDS/<%= product.id %>'" style="cursor: pointer;">
+            <img src="<%= product.image %>" class="img-fluid rounded mb-2 w-100">
+            <p class="text-danger mb-1"><%= product.price %></p>
+            <p class="fw-bold mb-1"><%= product.name %></p>
+            <p class="text-muted small mb-1"><%= product.category %></p>
+            <button class="btn btn-dark mt-3 cart w-100" onclick="window.location.href='/cart/add/kids/<%= product.id %>'">ADD TO CART</button>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="footer bg-light">
+  <div class="container">
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 border-top">
+
+      <!-- Logo -->
+      <div class="col text-center text-md-start footerlogo">
+        <a href="/" class="d-inline-block">
+          <img src="Bl_logo.png" alt="Bl_logo" style="max-height: 150px;">
+        </a>
+        <p class="text-muted small mb-0">© 2025 BL MARKETING</p>
+      </div>
+
+      <!-- More -->
+      <div class="col mb-3">
+        <h5>MORE</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Catalog</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Contact</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Owner</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About us</a></li>
+        </ul>
+      </div>
+
+      <!-- Inventory -->
+      <div class="col mb-3">
+        <h5>INVENTORY</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="/sportswear" class="nav-link p-0 text-body-secondary">Track</a></li>
+          <li class="nav-item mb-2"><a href="/sportswear" class="nav-link p-0 text-body-secondary">Shorts</a></li>
+          <li class="nav-item mb-2"><a href="/WOMEN" class="nav-link p-0 text-body-secondary">Bra</a></li>
+          <li class="nav-item mb-2"><a href="/SOCKS" class="nav-link p-0 text-body-secondary">Socks</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media -->
+      <div class="col mb-3 text-center text-md-start">
+        <h5>FOLLOW US</h5>
+        <div class="d-flex justify-content-center justify-content-md-start gap-3 mt-2">
+          <a href="https://www.instagram.com/_blmarketing_?igsh=eTllc3hhenBkdHI0" target="_blank" class="text-dark fs-4">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/9746557300" target="_blank" class="text-dark fs-4">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+    </footer>
+  </div>
+</section>
+
+
+<!-- Sign In Modal -->
+<div class="modal fade" id="signInModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sign In</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form  action="/auth/signup" method="post"   >
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control w-100 " required autocomplete="off" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="username" class="form-control w-100 " required autocomplete="off" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control  w-100 " required  autocomplete="new-password" >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Sign In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/auth/login" method="post"   >
+          <div class="mb-3  ">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control w-100 " required  autocomplete="off" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control  w-100 " required  autocomplete="new-password"  >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Responsive tweaks for mobile -->
+<style>
+@media (max-width: 575.98px) {
+  .product-card {
+    padding: 1rem !important;
+    margin-bottom: 1rem;
+  }
+  .pro.container-fluid {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-left: 0 !important;
+  }
+  .cart {
+    font-size: 1rem;
+    padding: 0.5rem 0;
+  }
+}
+</style>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+

@@ -1,0 +1,274 @@
+.hero-section {
+    background-image: url('./pexels-823sl-2294361.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    
+  }
+  
+
+  .product {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+
+  .satoshi-bold {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+  }
+
+  .ranade-bold{
+    font-family: 'Ranade', sans-serif;
+    font-weight: 800;
+  }
+
+  .ayush>div>img{
+    min-width: 30px;
+    height: auto;
+    margin-right: 2rem;
+    
+  }
+
+  .ayush>div{
+    margin-top: 40px;
+  }
+
+  .ayush>div>p{
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    margin-top: 17px;
+    font-size: larger;
+  }
+
+
+  .pro>div>img{
+   width: 300px;
+   height: 300px;
+  }
+
+
+  .fontstyle{
+    
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: larger;
+  }
+
+  .ayush>div{
+    transition: transform 0.5s ease-in-out ;
+  }
+
+  .ayush>div:hover{
+    transform: scale(1.1);
+
+  }
+
+a{
+  text-decoration: none;
+  color: black;
+  
+}
+
+a:hover {
+  color: rgb(249, 249, 249);
+}
+
+.area1{
+  width: 95%;
+  
+}
+
+
+.price{
+
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: larger;
+}
+
+
+
+.cake{
+  font-weight: 700;
+  font-family: sans-serif;
+  
+}
+
+.back:hover{
+  color: black;
+}
+
+@media (max-width: 991.98px){
+  .footercontent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    background-color: #f8f9fa;
+    
+    margin-left: -20px;
+  }
+
+
+  .footermedia{
+ position: relative;
+ left: 210px;
+ top: 30px;
+  }
+  .footermedia>div>a>img{
+ height: 50px;
+ width: 50px;
+  }
+  .footerinventory{
+    margin-top: 25px;
+    
+  }
+  .footermore{
+    margin-top: 30px;
+    
+  }
+}
+
+
+/* General font */
+body {
+  font-family: 'Satoshi', sans-serif;
+}
+
+/* Logo */
+.navbar-brand > img {
+  width: 100px;
+  height: 100px;
+}
+
+/* Navbar height for desktop */
+@media (min-width: 992px) {
+  .navbar .d-flex {
+    margin-left: 250px;
+  }
+  .navbar form {
+    margin-left: 3rem;
+  }
+  .navbar {
+    height: 60px;
+  }
+}
+
+/* Search input */
+.form-control {
+  width: 600px;
+}
+
+/* ===== MOBILE STYLES ===== */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    padding-top: 1rem;
+  }
+
+  /* Search box full width */
+  .navbar form {
+    margin-left: 0 !important;
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  /* Align buttons on mobile */
+  .navbar .d-flex {
+    margin-left: 0 !important;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  /* Adjust navbar spacing */
+  .navbarcontent {
+    margin-top: -20px;
+  }
+
+  .navbar-brand {
+    height:80px;
+  }
+   
+
+  .navbar-brand > img {
+    height: 100px;
+  }
+
+  .navbar-toggler {
+    margin-top: 20px;
+  }
+}
+
+/* Footer - original styling */
+footer {
+  background-color: #f8f9fa;
+}
+
+.footerlogo {
+  position: relative;
+  top: -30px;
+}
+
+/* ===== MOBILE STYLES ===== */
+@media (max-width: 991.98px) {
+  /* Footer - stack columns */
+  footer .col {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  footer .nav {
+    align-items: center;
+  }
+
+  .footercontent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    background-color: #f8f9fa;
+    margin-left: -20px;
+  }
+
+  .footermedia {
+    position: relative;
+    left: 210px;
+    top: 30px;
+  }
+
+  .footermedia > div > a > img {
+    height: 50px;
+    width: 50px;
+  }
+
+  .footerinventory {
+    margin-top: 25px;
+  }
+
+  .footermore {
+    margin-top: 30px;
+  }
+}
+
+
+@keyframes slideup {
+  0% {
+    opacity: 0;
+    transform: translateY(50px); /* start lower */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* end in place */
+  }
+}
+
+.productcard {
+  opacity: 0; /* hidden by default */
+}
+
+.productcard.animate{
+  animation: slideup 1s ease-in forwards;
+}

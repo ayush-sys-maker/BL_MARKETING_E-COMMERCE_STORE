@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEN | | BL MARKEING</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@301&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="homecss.css"> 
+    <style>
+      .cart:hover{
+        transform: scale(1.1); transition: all .5s ease;
+     
+      }
+     
+  /* Mobile specific tweaks */
+  @media (max-width: 768px) {
+    .navbar-nav {
+      margin-left: 0 !important;
+      padding-left: 0 !important;
+    }
+
+    form.d-flex {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: 100%;
+    }
+
+    .input-group {
+      width: 100%;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+    }
+
+    .pro {
+      margin-left: 0 !important;
+      padding: 0 15px;
+    }
+
+    .footer {
+      text-align: center;
+    }
+
+    .footer .nav {
+      align-items: center;
+    }
+
+    .footer .col {
+      margin-bottom: 20px;
+    }
+
+    .d-flex.gap-2 {
+      margin-left: auto !important;
+    }
+  }
+
+  
+
+.footercontent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    background-color: #f8f9fa;
+    
+    margin-left: -20px;
+  }
+
+
+  .footermedia{
+ position: relative;
+ left: 210px;
+ top: 30px;
+  }
+  .footermedia>div>a>i{
+    font-size: 1.5rem;
+  }
+  .footerinventory{
+    margin-top: 25px;
+    
+  }
+  .footermore{
+    margin-top: 30px;
+    
+  }
+
+
+    </style>
+
+</head>
+<body>
+    
+
+<!-
+    <!--NAVBAR--> 
+<header class="sticky-top bg-white shadow-sm">
+  <nav class="navbar navbar-expand-lg container">
+    <div class="container-fluid navbarcontent">
+
+      <!-- Logo/Brand -->
+      <div class="navbar-brand" href="#">
+        <img class="img-fluid" src="Bl_logo.png" alt="Bl_logo">
+      </div>
+
+      <!-- Mobile Toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Main Content -->
+      <div class="collapse navbar-collapse" id="navbarContent">
+
+        <!-- Menu -->
+        <ul class="navbar-nav gap-lg-4 gap-2 ms-lg-5 ps-lg-5 mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/sportswear">Sportswear</a></li>
+          <li class="nav-item"><a class="nav-link" href="/WOMEN">Women</a></li>
+          <li class="nav-item"><a class="nav-link" href="/SOCKS">Socks </a></li>
+        </ul>
+
+        <!-- Search -->
+        <form class="d-flex ms-lg-5 me-lg-0 mx-auto my-2 my-lg-0" role="search" action="/search" method="get">
+          <div class="input-group">
+            <input class="form-control" type="search" placeholder="Search" name="q">
+            <button class="btn btn-outline-secondary" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+
+        <!-- Actions -->
+        <div class="d-flex gap-2 align-items-center ms-lg-5">
+
+          <% if(!user){ %>
+            <!-- Login & Sign In -->
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</button>
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+          <% } else { %>
+            <button class="btn btn-primary rounded-pill" onclick="window.location.href='/order/my-orders'" style="font-size: small;">MY ORDER</button>
+            <form action="/auth/logout" method="post">
+              <button type="submit" class="btn fs-6"><i class="fas fa-sign-out-alt"></i></button>
+            </form>
+          <% } %>
+
+          <!-- Cart -->
+          <button class="btn position-relative p-1">
+            <a href="/cart"><i class="fas fa-shopping-cart fs-5"></i></a>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+        
+       
+
+
+<!-- Cart button -->
+
+
+<!--Products-->
+
+
+<!---MEN-->
+<section>
+
+
+
+<div class="pro container-fluid justify-content-center mt-5 px-3 px-md-5">
+    <div class="row g-3"> <!-- 'g-3' adds consistent gutters -->
+      <!-- Card 1 -->
+       <% feature.forEach(product=>{ %>  <!--product more than one bcoz it loops through the features-->
+     <div class="ayush col-12 col-sm-6 col-md-4 col-lg-4">
+  <div class="product-card h-100 p-3 border rounded"  style="cursor: pointer;">
+    <img src="<%= product.img %>"onclick="window.location.href='/products/<%= product.category  %>/<%= product.id %>'" class="img-fluid rounded mb-2">
+    <p class="text-danger mb-1"><%= product.price %></p>
+    <p class="fw-bold mb-1"><%= product.name %></p>
+    <p class="text-muted small mb-1"><%= product.category %></p>
+    <button  class="btn btn-dark mt-3 cart" onclick="window.location.href= '/cart/add/men/<%= product.id %>'">ADD TO CART</button>
+  </div>
+</div>
+      <%  } )  %>
+     </section>
+
+
+
+
+<!--WOMEN-->
+
+
+
+  
+
+
+
+
+<section class="footer bg-light">
+  <div class="container">
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 border-top">
+
+      <!-- Logo -->
+      <div class="col text-center text-md-start footerlogo">
+        <a href="/" class="d-inline-block">
+          <img src="Bl_logo.png" alt="Bl_logo" style="max-height: 150px;">
+        </a>
+        <p class="text-muted small mb-0">© 2025 BL MARKETING</p>
+      </div>
+
+      <!-- More -->
+      <div class="col mb-3">
+        <h5>MORE</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Catalog</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Contact</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Owner</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About us</a></li>
+        </ul>
+      </div>
+
+      <!-- Inventory -->
+      <div class="col mb-3">
+        <h5>INVENTORY</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="/sportswear" class="nav-link p-0 text-body-secondary">Track</a></li>
+          <li class="nav-item mb-2"><a href="/sportswear" class="nav-link p-0 text-body-secondary">Shorts</a></li>
+          <li class="nav-item mb-2"><a href="/WOMEN" class="nav-link p-0 text-body-secondary">Bra</a></li>
+          <li class="nav-item mb-2"><a href="/SOCKS" class="nav-link p-0 text-body-secondary">Socks</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media -->
+      <div class="col mb-3 text-center text-md-start">
+        <h5>FOLLOW US</h5>
+        <div class="d-flex justify-content-center justify-content-md-start gap-3 mt-2">
+          <a href="https://www.instagram.com/_blmarketing_?igsh=eTllc3hhenBkdHI0" target="_blank" class="text-dark fs-4">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/9746557300" target="_blank" class="text-dark fs-4">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+    </footer>
+  </div>
+</section>
+
+
+
+<!-- Sign In Modal -->
+<div class="modal fade" id="signInModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sign In</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form  action="/auth/signup" method="post"   >
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="username" class="form-control w-100 " required autocomplete="off" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control  w-100 " required  autocomplete="new-password" >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Sign In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/auth/login" method="post"   >
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control w-100 " required autocomplete="off" >
+          </div>
+          <div class="mb-3  ">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control w-100 " required  autocomplete="off" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control  w-100 " required  autocomplete="new-password"  >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sign In Modal -->
+<div class="modal fade" id="signInModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sign In</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form  action="/auth/signup" method="post"   >
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="username" class="form-control w-100 " required autocomplete="off" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control  w-100 " required  autocomplete="new-password" >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Sign In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/auth/login" method="post"   >
+          <div class="mb-3  ">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control w-100 " required  autocomplete="off" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control  w-100 " required  autocomplete="new-password"  >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
