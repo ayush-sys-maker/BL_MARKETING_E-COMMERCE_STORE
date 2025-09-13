@@ -3,44 +3,56 @@ import path from "path";
 import { fileURLToPath } from "url";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
-import data from "./data/data.js";
 import Razorpay from "razorpay";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
+import methodOverride from "method-override";
 
 dotenv.config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-const port = 3000;
+
+// ✅ Use Render's port or fallback to 3000
+const PORT = process.env.PORT || 3000;
 
 // View engine setup
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 // Middleware
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true })); // ✅ for form POST
-app.use(express.json()); // ✅ for JSON
-app.use(methodOverride("_method")); // Moved up before session middleware
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(methodOverride("_method"));
 
-// Session configuration
-app.use(session({
-  store: new (connectPgSimple(session))({
-    conObject: {
-      connectionString: process.env.DATABASE_URL || "postgres://postgres:987654@localhost:5432/BL MARKETING"
-    },
-    createTableIfMissing: true   // auto-create session table
-  }),
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day
-}));
+// ✅ Session store with connect-pg-simple
+const PgSession = connectPgSimple(session);
+
+app.use(
+  session({
+    store: new PgSession({
+      conObject: {
+        connectionString:
+          process.env.DATABASE_URL ||
+          "postgres://postgres:987654@localhost:5432/BL_MARKETING",
+        ssl:
+          process.env.NODE_ENV === "production"
+            ? { rejectUnauthorized: false }
+            : false,
+      },
+      createTableIfMissing: true,
+    }),
+    secret: process.env.SESSION_SECRET || "your-secret-key",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 1 day
+  })
+);
 
 // Debug middleware
 app.use((req, res, next) => {
-  console.log('Request Body:', req.body);
-  console.log('Request Headers:', req.headers['content-type']);
+  console.log("Request Body:", req.body);
+  console.log("Request Headers:", req.headers["content-type"]);
   next();
 });
 
@@ -62,7 +74,6 @@ import payment from "./routes/payment.js";
 import sportswear from "./routes/sportswear.js";
 import auth from "./routes/auth.js";
 import search from "./routes/search.js";
-import methodOverride from "method-override";
 import order from "./routes/order.js";
 import whatsapp from "./routes/whatsapp.js";
 
@@ -76,11 +87,11 @@ app.use("/KIDS", KIDS);
 app.use("/cart", cart);
 app.use("/payment", payment);
 app.use("/sportswear", sportswear);
-app.use("/auth", auth); // ✅ Login/Signup routes
+app.use("/auth", auth);
 app.use("/search", search);
 app.use("/order", order);
-app.use("/whatsapp", whatsapp);  // WhatsApp webhook routes
+app.use("/whatsapp", whatsapp);
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`✅ Server is running on port ${PORT}`);
 });
