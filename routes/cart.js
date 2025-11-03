@@ -1,50 +1,63 @@
 import express from "express";
 import productRepository from "../data/dashboard.js";
+
 const router = express.Router();
 
 router.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.originalUrl}`);
-    next();
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.originalUrl}`);
+  next();
 });
 
-// Add to cart
+// Add to cart (DB-backed)
 router.get("/add/:category/:id", async (req, res) => {
+  try {
     const { category, id } = req.params;
-    const userid = req.session.user?.id
+    const userid = req.session.user?.id;
     const color = req.query.color;
     const size = req.query.size;
-    if(!userid) return res.send("Please login to add to cart")
 
-    const cart = await productRepository.AddToCart(userid,category,id,color,size)
- 
-    res.redirect("/cart");
+    if (!userid) {
+      return res.status(401).send("Please login to add to cart");
+    }
+
+    await productRepository.AddToCart(userid, category, id, color, size);
+    return res.redirect("/cart");
+  } catch (err) {
+    console.error("Error adding to cart:", err);
+    return res.status(500).send("Failed to add to cart");
+  }
 });
 
-// View cart
-router.get("/",  async (req, res) => {
-    const userid = req.session.user?.id
-    if(!userid) return res.send("Please login to view cart")
-     const cart = await productRepository.getCart(userid)
-    const total = cart.reduce((sum, item) => sum + (Number(item.price) || 0), 0);  // this helps to add sum + price of current item //
- console.log(cart);
+// View cart (DB-backed)
+router.get("/", async (req, res) => {
+  try {
+    const userid = req.session.user?.id;
+    if (!userid) return res.status(401).send("Please login to view cart");
 
-    res.render('page/cart', { cart, total, user: req.session.user }); // this takkes the cart and total to the cart.ejs //
+    const cart = await productRepository.getCart(userid) || [];
+    const total = cart.reduce((sum, item) => sum + (Number(item.price) || 0), 0);
+
+    console.log("Cart for user", userid, cart);
+    return res.render("page/cart", { cart, total, user: req.session.user });
+  } catch (err) {
+    console.error("Error fetching cart:", err);
+    return res.status(500).send("Failed to load cart");
+  }
 });
 
-// Change from using cart entry ID to product ID
-router.post("/remove/:id", async (req, res) => {  // Changed from :id to :product_id
+// Remove from cart (DB-backed) - POST
+router.post("/remove/:id", async (req, res) => {
+  try {
     const { id } = req.params;
-    const user_id = req.session.user?.id;
-    
-    const result = await productRepository.removecart(user_id, id);
-    console.log(id);
-    res.redirect("/cart");
-});
+    const userid = req.session.user?.id;
+    if (!userid) return res.status(401).send("Please login to modify cart");
 
-// Add this as a temporary test
-router.get("/remove/:id", (req, res) => {
-    console.log("Received GET request to /remove/:id - this should be a POST request");
-    res.redirect("/cart");
+    await productRepository.removecart(userid, id);
+    return res.redirect("/cart");
+  } catch (err) {
+    console.error("Error removing from cart:", err);
+    return res.status(500).send("Failed to remove item");
+  }
 });
 
 export default router;

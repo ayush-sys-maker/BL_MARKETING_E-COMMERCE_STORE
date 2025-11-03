@@ -64,8 +64,8 @@ app.use((req, res, next) => {
 
 // Import routes
 import homeroute from "./routes/MEN.js";
-import productroute from "./routes/product.js";
-import homepage from "./routes/homepage.js";
+import productroute from "./routes/products.js";
+import homepage from "./routes/home.js";
 import WOMEN from "./routes/WOMEN.js";
 import SOCKS from "./routes/SOCKS.js";
 import KIDS from "./routes/KIDS.js";
