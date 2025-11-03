@@ -6,10 +6,33 @@ import connectPgSimple from "connect-pg-simple";
 import Razorpay from "razorpay";
 import dotenv from "dotenv";
 import methodOverride from "method-override";
+import fs from "fs"; // ✅ ADD THIS
+import data from "./data/dashboard.js"; // ✅ ADD THIS
 
 dotenv.config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Auto-run schema on startup
+async function setupDatabase() {
+  try {
+    console.log("🔄 Setting up database tables from schema.sql...");
+    
+    // Read your schema.sql file
+    const schemaPath = path.join(__dirname, 'schema.sql');
+    const schemaSQL = fs.readFileSync(schemaPath, 'utf8');
+    
+    // Run the schema
+    await data.query(schemaSQL);
+    console.log("✅ All tables created from schema.sql");
+  } catch (error) {
+    console.log("Database setup note:", error.message);
+  }
+}
+
+// Call this function before starting server
+setupDatabase();
+
 const app = express();
 
 // ✅ Use Render's port or fallback to 3000
@@ -92,12 +115,9 @@ app.use("/search", search);
 app.use("/order", order);
 app.use("/whatsapp", whatsapp);
 
-
 app.get("/", (req, res) => {
-    res.render('page/home'); // or wherever your homepage is
+    res.render('page/home');
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`✅ Server is running on port ${PORT}`);
