@@ -20,6 +20,16 @@ router.get("/add/:category/:id", async (req, res) => {
       return res.status(401).send("Please login to add to cart");
     }
 
+    if (!size) {
+            return res.status(400).send('Please select a size');
+        }
+
+        const productidInt = parseInt(id);
+        if (isNaN(productidInt)) {
+            return res.status(400).send('Invalid product ID');
+        }
+
+
     await productRepository.AddToCart(userid, category, id, color, size);
     return res.redirect("/cart");
   } catch (err) {

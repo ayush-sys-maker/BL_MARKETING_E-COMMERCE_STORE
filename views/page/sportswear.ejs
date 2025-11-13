@@ -300,7 +300,33 @@
   });
   
   
-  
+  function addToCart(productId, category) {
+    const sizeSelect = document.querySelector('select[name="size"]');
+    if (!sizeSelect) {
+        alert('Size selection not available');
+        return;
+    }
+    
+    const size = sizeSelect.value;
+    if (!size) {
+        alert('Please select a size');
+        return;
+    }
+    
+    window.location.href = `/cart/add/${category}/${productId}?size=${encodeURIComponent(size)}`;
+}
+
+// Add event listeners to size selects
+document.addEventListener('DOMContentLoaded', function() {
+    const sizeSelects = document.querySelectorAll('select[name="size"]');
+    sizeSelects.forEach(select => {
+        select.addEventListener('change', function() {
+            if (this.value) {
+                this.classList.remove('is-invalid');
+            }
+        });
+    });
+});
   
   
   </script>

@@ -6,36 +6,14 @@ import connectPgSimple from "connect-pg-simple";
 import Razorpay from "razorpay";
 import dotenv from "dotenv";
 import methodOverride from "method-override";
-import fs from "fs"; // ✅ ADD THIS
-import data from "./data/dashboard.js"; // ✅ ADD THIS
+import data from "./data/dashboard.js";
 
 dotenv.config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// Auto-run schema on startup
-async function setupDatabase() {
-  try {
-    console.log("🔄 Setting up database tables from schema.sql...");
-    
-    // Read your schema.sql file
-    const schemaPath = path.join(__dirname, 'schema.sql');
-    const schemaSQL = fs.readFileSync(schemaPath, 'utf8');
-    
-    // Run the schema
-    await data.query(schemaSQL);
-    console.log("✅ All tables created from schema.sql");
-  } catch (error) {
-    console.log("Database setup note:", error.message);
-  }
-}
-
-// Call this function before starting server
-setupDatabase();
-
 const app = express();
 
-// ✅ Use Render's port or fallback to 3000
+// ✅ Use Render's port
 const PORT = process.env.PORT || 3000;
 
 // View engine setup
@@ -48,34 +26,32 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 
-// ✅ Session store with connect-pg-simple
+// ✅ Session store with Render PostgreSQL
 const PgSession = connectPgSimple(session);
 
 app.use(
   session({
     store: new PgSession({
       conObject: {
-        connectionString:
-          process.env.DATABASE_URL ||
-          "postgres://postgres:987654@localhost:5432/BL_MARKETING",
-        ssl:
-          process.env.NODE_ENV === "production"
-            ? { rejectUnauthorized: false }
-            : false,
+        connectionString: process.env.DATABASE_URL,
+        ssl: { rejectUnauthorized: false }
       },
       createTableIfMissing: true,
     }),
-    secret: process.env.SESSION_SECRET || "your-secret-key",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 1 day
+    cookie: { 
+      maxAge: 24 * 60 * 60 * 1000,
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true
+    },
   })
 );
 
 // Debug middleware
 app.use((req, res, next) => {
   console.log("Request Body:", req.body);
-  console.log("Request Headers:", req.headers["content-type"]);
   next();
 });
 
@@ -119,6 +95,8 @@ app.get("/", (req, res) => {
     res.render('page/home');
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`✅ Server is running on port ${PORT}`);
+  console.log(`🌐 Environment: ${process.env.NODE_ENV}`);
+  console.log(`🗄️ Database: Render PostgreSQL`);
 });
