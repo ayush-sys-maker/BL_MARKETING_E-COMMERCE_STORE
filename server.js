@@ -29,6 +29,12 @@ app.use(methodOverride("_method"));
 // ✅ Session store with Render PostgreSQL
 const PgSession = connectPgSimple(session);
 
+// if behind proxy (Render/Heroku) so secure cookies work
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
+
+
 app.use(
   session({
     store: new PgSession({

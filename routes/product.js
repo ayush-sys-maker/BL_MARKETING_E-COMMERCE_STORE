@@ -1,32 +1,32 @@
-import express from "express";
+import express from "express"
 import productRepository from "../data/dashboard.js";
 
-const router = express.Router();
+const router = express.Router();    
 
 // Handle all categories with one route
-router.get("/:category/:id", async (req, res) => {
-  try {
-    const { category, id } = req.params;
-    
-    // ✅ Parse and validate id BEFORE using it
-    const productId = parseInt(id, 10);
-    if (isNaN(productId)) {
-      return res.status(400).send("Invalid product ID");
-    }
+router.get("/:id",async (req, res) => {
+    const id = parseInt(req.params.id);
 
-    console.log(`Fetching product: category=${category}, id=${productId}`);
+    const product = await productRepository.getProductById(id);
     
-    const product = await productRepository.getProductById(productId);
-    
-    if (!product) {
-      return res.status(404).send("Product not found");
+    if (!product) return res.status(404).send('Product not found');
+    if(product.color){
+        product.colors = product.color.split(",").map(color => color.trim());
+    }else{
+        product.colors = [];
     }
+    
+if(product.size){
+    product.sizes = product.size.split(",").map(size => size.trim());
+}else{
+    product.sizes = ["S","M","L","XL"];
+}
 
-    res.render("page/product", { product });
-  } catch (err) {
-    console.error("Error fetching product:", err);
-    res.status(500).send("Failed to load product");
-  }
+
+    res.render('page/product', {
+        title: `${product.name}`,
+        product
+    });
 });
 
 export default router;

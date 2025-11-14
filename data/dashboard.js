@@ -31,19 +31,8 @@ const productRepository  = {
 
   // Get product by ID
   async getProductById(id) {
-   try {
-if(typeof id !=="number"||isNaN(id)){
-  throw new Error ("Invalid product ID");
-
-  const result = await data.query(
-    'SELECT * FROM products WHERE id = $1',
-    [id]
-  );
-  return result.rows[0];  
-
-   }}catch(err){
-
-   }
+    const { rows } = await data.query('SELECT * FROM products WHERE id = $1  ', [id]);
+    return rows[0];
   },
 
 
@@ -222,21 +211,3 @@ async clearCart(user_id){
 };
 
 export default productRepository;
-
-export async function getProductById(productId) {
-  try {
-    // ✅ Ensure productId is a number
-    if (typeof productId !== "number" || isNaN(productId)) {
-      throw new Error("Product ID must be a valid number");
-    }
-
-    const result = await data.query(
-      "SELECT * FROM products WHERE id = $1",
-      [productId]
-    );
-    return result.rows[0] || null;
-  } catch (err) {
-    console.error("Error in getProductById:", err);
-    throw err;
-  }
-}

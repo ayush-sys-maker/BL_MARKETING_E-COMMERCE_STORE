@@ -72,6 +72,7 @@ router.post("/login", async (req, res) => {
             name: user.name // Include name for display
         };
 
+
         console.log("Session User:", req.session.user);
 
         // Save session explicitly before redirect
