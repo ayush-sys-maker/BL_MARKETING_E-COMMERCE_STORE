@@ -30,7 +30,7 @@ router.get("/add/:category/:id", async (req, res) => {
         }
 
 
-    await productRepository.AddToCart(userid, category, id, color, size);
+    await productRepository.AddToCart(userid, category, productidInt, color, size);
     return res.redirect("/cart");
   } catch (err) {
     console.error("Error adding to cart:", err);
