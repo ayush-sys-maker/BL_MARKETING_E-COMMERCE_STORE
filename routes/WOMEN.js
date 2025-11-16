@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/",async(req,res)=>{
 
     try{
-        const product = await productRepository.getProductsByCategory("Women");
+        let product = await productRepository.getProductsByCategory("Women");
 product = product.sort((a,b) => a.id - b.id);
 
     res.render('page/WOMEN',{

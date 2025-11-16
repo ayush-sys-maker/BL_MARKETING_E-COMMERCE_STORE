@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/",async(req,res)=>{ 
     try{
-        const product = await productRepository.getProductsByCategory("socks");
+        let product = await productRepository.getProductsByCategory("socks");
 product = product.sort((a,b) => a.id - b.id);
     res.render('page/socks',{
         feature:product.slice(0,9)

@@ -9,7 +9,7 @@ router.get("/",async(req,res)=>{
 
 
     try{
-        const product = await productRepository.getProductsByCategory("kids");
+        let product = await productRepository.getProductsByCategory("kids");
 
 product = product.sort((a,b) => a.id - b.id);
     res.render('page/kids',{
