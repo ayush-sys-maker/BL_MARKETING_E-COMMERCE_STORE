@@ -10,6 +10,8 @@ router.get("/",async(req,res)=>{
     try{
         const product = await productRepository.getProductsByCategory("Sportswear");
 
+        product = product.sort((a,b) => a.id - b.id);
+
     res.render('page/sportswear',{feature:product.slice(0,8)});
 
 

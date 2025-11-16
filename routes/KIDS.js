@@ -11,7 +11,7 @@ router.get("/",async(req,res)=>{
     try{
         const product = await productRepository.getProductsByCategory("kids");
 
-
+product = product.sort((a,b) => a.id - b.id);
     res.render('page/kids',{
         feature:product.slice(0,9)
     });
