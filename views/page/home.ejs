@@ -81,7 +81,7 @@
         /* Mobile */
         @media (max-width: 991px) {
             .hero-image {
-                height: 600px;
+                height: 400px;
             }
             .hero {
                 height: 600px;
@@ -207,9 +207,14 @@
                 align-items: center;
             }
 
-            .belowhero{
-                margin-top: -150px;
-            }
+           .belowhero {
+    margin-top: -30px; /* Small subtle overlap */
+    position: relative;
+    z-index: 2;
+    background: white;
+    border-radius: 20px 20px 0 0;
+    padding-top: 2rem;
+}
 
             .footercontent{
                 display: flex;
