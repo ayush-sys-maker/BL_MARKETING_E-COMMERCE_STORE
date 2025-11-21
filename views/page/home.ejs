@@ -15,14 +15,12 @@
     <link rel="stylesheet" href="homecss.css">
     <style>
         /* ===== ORIGINAL DESKTOP STYLES ===== */
-        /* These remain unchanged from your original design */
         body {
             font-family: 'Satoshi', sans-serif;
         }
         .navbar-brand>img{
        width: 100px;
        height: 100px;
-   
         }
         
         /* Navbar - keep original desktop spacing */
@@ -36,49 +34,62 @@
             .mob{
               display: none;
             }
-            
-.navbar{
-height: 60px;
-}
+            .navbar{
+            height: 60px;
+            }
         }
         
-        /* Hero section - original negative margin */
+        /* Hero section - fixed for responsive images */
         .hero {
-width: 100%;
-overflow: hidden;
-        height: 800px;
-        display: flex;
-        align-items: center;
-        color: rgba(3, 4, 4, 0.995);
-        position: relative;
-        
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            color: rgba(3, 4, 4, 0.995);
+            position: relative;
         }
         
-.hero-section{
-  width: 100%;
-  display: flex;
-  animation: slide 12s infinite ;
-  margin-top: -160px;
-}
-.hero-sub{
-  position: relative;
-  width: 100%;
-  height:auto;
-  flex-shrink: 0;
-}
+        .hero-section{
+            width: 100%;
+            display: flex;
+            animation: slide 12s infinite;
+        }
+        
+        .hero-sub{
+            position: relative;
+            width: 100%;
+            height: auto;
+            flex-shrink: 0;
+        }
 
+        .hero-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
 
-.footerlogo{
-position: relative;
-top: -30px;
-}
+        /* Desktop */
+        @media (min-width: 992px) {
+            .hero-image {
+                height: 800px;
+            }
+            .hero {
+                height: 800px;
+            }
+        }
 
-
+        /* Mobile */
+        @media (max-width: 991px) {
+            .hero-image {
+                height: 600px;
+            }
+            .hero {
+                height: 600px;
+            }
+        }
 
         @media (min-width: 992px) {
-
-       .hero-sub>.container {
-               
+            .hero-sub>.container {
                 position: absolute;
                 top: 50%;
                 left: 50%;
@@ -126,15 +137,7 @@ top: -30px;
         }
         
         /* ===== MOBILE STYLES ===== */
-        /* Only these kick in on small screens */
         @media (max-width: 991.98px) {
-            /* Navbar collapses properly */
-            
-
-            .hero{
-              height: 850px;
-          
-            }
             .navbar-collapse {
                 padding-top: 1rem;
             }
@@ -160,30 +163,22 @@ top: -30px;
             }
             
             .hero-sub>.container {
-         position: absolute;
-         top: 70%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         font-weight: bold;
-        
+                position: absolute;
+                top: 70%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-weight: bold;
             }
 
-.hero-sub>.container>a{
-  font-size: .8rem;
-}
-
-            .hero-sub>picture>img{
-              height: 900px;
-              margin-top: -120px;
+            .hero-sub>.container>a{
+                font-size: .8rem;
             }
 
             .hero-sub>.container> p{
                 font-size: 1rem;
                 line-height: 1.5rem;
                 width: 80%;
-               margin-left: 40px;
-              
-
+                margin-left: 40px;
             }
             
             .hero-sub h1 {
@@ -212,53 +207,53 @@ top: -30px;
                 align-items: center;
             }
 
-  .belowhero{
-  margin-top: -150px;
-  }
-
-  .footercontent{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150px;
-    background-color: #f8f9fa;
-    
-    margin-left: -20px;
-  }
-
-
-  .footermedia{
- position: relative;
- left: 210px;
- top: 30px;
-  }
-  .footermedia>div>a>img{
- height: 50px;
- width: 50px;
-  }
-  .footerinventory{
-    margin-top: 25px;
-    
-  }
-  .footermore{
-    margin-top: 30px;
-    
-  }
-  .navbarcontent{
-    margin-top: -20px;
-  }
-  .navbar-brand{
-    height: 80px;
-  }
-  .navbar-brand>img{
-    height: 100px;
-  }
-  .navbar-toggler{
-             margin-top: 20px;
+            .belowhero{
+                margin-top: -150px;
             }
-       
-  
 
+            .footercontent{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 150px;
+                background-color: #f8f9fa;
+                margin-left: -20px;
+            }
+
+            .footermedia{
+                position: relative;
+                left: 210px;
+                top: 30px;
+            }
+            
+            .footermedia>div>a>img{
+                height: 50px;
+                width: 50px;
+            }
+            
+            .footerinventory{
+                margin-top: 25px;
+            }
+            
+            .footermore{
+                margin-top: 30px;
+            }
+            
+            .navbarcontent{
+                margin-top: -20px;
+            }
+            
+            .navbar-brand{
+                height: 80px;
+            }
+            
+            .navbar-brand>img{
+                height: 100px;
+            }
+            
+            .navbar-toggler{
+                margin-top: 20px;
+            }
         }
         
         /* Small mobile tweaks */
@@ -273,9 +268,8 @@ top: -30px;
             }
 
             .desk{
-              display: none;
+                display: none;
             }
-           
         }
 
     </style>
@@ -317,50 +311,42 @@ top: -30px;
           <!-- Actions -->
           <div class="d-flex gap-2 align-items-center ms-lg-5">
           
-          
-         
+            <% if(!user){ %>
+            <!-- Login button -->
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signInModal">
+              Sign In
+            </button>
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+             Login
+            </button>
+            <% }else{ %>
+              <button  class="btn btn-primary  rounded-pill" onclick="window.location.href='/order/my-orders'" style="font-size: small;"  >MY ORDER</button>
 
-
-  <!-- Cart button -->
- 
-
-   <% if(!user){ %>
-    <!-- Login button -->
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signInModal">
-      Sign In
-    </button>
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
-     Login
-    </button>
-    <% }else{ %>
-      <button  class="btn btn-primary  rounded-pill" onclick="window.location.href='/order/my-orders'" style="font-size: small;"  >MY ORDER</button>
-
-    <form action="/auth/logout" method="post">
-    <button type="submit" class="btn fs-6 " >
-     <i class="fas fa-sign-out-alt"></i>
-    </button>
-
-    </form>
-    <% } %>
-    <button class="btn position-relative p-1">
-      <a href="/cart"><i class="fas fa-shopping-cart fs-5"></i></a>
-     </button>
-
+            <form action="/auth/logout" method="post">
+            <button type="submit" class="btn fs-6 " >
+             <i class="fas fa-sign-out-alt"></i>
+            </button>
+            </form>
+            <% } %>
+            
+            <button class="btn position-relative p-1">
+              <a href="/cart"><i class="fas fa-shopping-cart fs-5"></i></a>
+            </button>
           </div>
         </div>
       </div>
     </nav>
 </header>
 
-<!-- hero -->
+<!-- Hero Section - FIXED -->
 <section class="hero d-flex align-items-center">
   <div class="hero-section">
     <div class="hero-sub">
-      <!-- Desktop Image -->
+      <!-- Responsive Image -->
       <picture>
         <source media="(min-width: 992px)" srcset="track.jpg">
         <source media="(max-width: 991px)" srcset="track-mobile.jpg">
-        <img src="track.jpg" class="img-fluid" alt="track" style="width: 100%; height: 800px; object-fit: cover;">
+        <img src="track.jpg" class="hero-image img-fluid" alt="track">
       </picture>
 
       <div class="container text-center text-md-start">
@@ -372,8 +358,7 @@ top: -30px;
   </div>
 </section>
 
-
-
+<!-- Products Section -->
 <section class="container-fluid  px-lg-5 products-grid    belowhero ">
     <div class="row gx-4 justify-content-center">
       <!-- Product 1 - Sports Wear -->
@@ -571,26 +556,14 @@ top: -30px;
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
 <script>
-
 let elements = document.querySelectorAll('.productcard');
-
 let observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('animate');   // add class when visible
+      entry.target.classList.add('animate');
     } else {
-      entry.target.classList.remove('animate'); // remove class when hidden
+      entry.target.classList.remove('animate');
     }
   });
 }, { threshold: 0.2 });
@@ -598,11 +571,6 @@ let observer = new IntersectionObserver(entries => {
 elements.forEach(element => {
   observer.observe(element);
 });
-
-
-
-
-
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
