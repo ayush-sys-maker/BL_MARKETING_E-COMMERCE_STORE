@@ -33,6 +33,9 @@
             .navbar form {
                 margin-left: 3rem;
             }
+            .mob{
+              display: none;
+            }
             
 .navbar{
 height: 60px;
@@ -277,6 +280,10 @@ top: -30px;
                 flex: 0 0 100%;
                 max-width: 100%;
             }
+
+            .desk{
+              display: none;
+            }
            
         }
 
@@ -359,11 +366,10 @@ top: -30px;
 
   <div  class="hero-section"  >
   <div class="hero-sub"   >
-    <picture>
-      <source media="(max-width: 768px)" src="/track-mob-com.jpg">
-      <source media="(min-width: 768px)" srcset="track.jpg">
-      <img src="track.jpg" class="img-fluid" alt="track">
-    </picture>
+    
+      <img class="desk" src="track.jpg" class="img-fluid" alt="track">
+      <img class="mob" src="track-mobile.jpg" class="img-fluid" alt="track">
+   
 
     <div class="container text-center text-md-start">
       <h1 class="display-5 fw-bold">Comfortable. Durable. Affordable.</h1>
