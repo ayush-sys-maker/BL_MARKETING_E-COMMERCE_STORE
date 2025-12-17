@@ -38,23 +38,26 @@ if (process.env.NODE_ENV === "production") {
 app.use(
   session({
     store: new PgSession({
-      conObject: {
-        connectionString: process.env.DATABASE_URL,
-        ssl: { rejectUnauthorized: false }
+      conObject:{
+        host:"localhost",
+        port:5432,
+        user:"postgres",
+        password:"987654",
+        database:"BLOG SITE",
+        ssl:false
       },
       createTableIfMissing: true,
     }),
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || "thisshouldbeabettersecret",
     resave: false,
     saveUninitialized: false,
-    cookie: { 
-      maxAge: 24 * 60 * 60 * 1000,
-      secure: process.env.NODE_ENV === 'production',
-      httpOnly: true
-    },
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      secure: process.env.NODE_ENV === "production", // serve secure cookies in production
+    }
+  
   })
-);
-
+)
 // Debug middleware
 app.use((req, res, next) => {
   console.log("Request Body:", req.body);
