@@ -8,6 +8,8 @@ import dotenv from "dotenv";
 import methodOverride from "method-override";
 import data from "./data/dashboard.js";
 
+
+
 dotenv.config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -38,26 +40,18 @@ if (process.env.NODE_ENV === "production") {
 app.use(
   session({
     store: new PgSession({
-      conObject:{
-        host:"localhost",
-        port:5432,
-        user:"postgres",
-        password:"987654",
-        database:"BLOG SITE",
-        ssl:false
-      },
+      pool: data, // ✅ USE EXISTING NEON POOL
       createTableIfMissing: true,
     }),
     secret: process.env.SESSION_SECRET || "thisshouldbeabettersecret",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
-      secure: process.env.NODE_ENV === "production", // serve secure cookies in production
-    }
-  
+      maxAge: 1000 * 60 * 60 * 24,
+      secure: process.env.NODE_ENV === "production",
+    },
   })
-)
+);
 // Debug middleware
 app.use((req, res, next) => {
   console.log("Request Body:", req.body);
