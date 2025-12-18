@@ -6,7 +6,7 @@ import connectPgSimple from "connect-pg-simple";
 import Razorpay from "razorpay";
 import dotenv from "dotenv";
 import methodOverride from "method-override";
-import data from "./data.js";
+import data from "./data/data.js";
 
 
 
