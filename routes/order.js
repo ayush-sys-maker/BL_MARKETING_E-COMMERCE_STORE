@@ -36,6 +36,7 @@ router.get("/my-orders", async (req, res) => {
                 products p ON oi.product_id = p.id
             WHERE 
                 o.user_id = $1
+               AND o.is_cancel = false
             GROUP BY 
                 o.id
             ORDER BY 

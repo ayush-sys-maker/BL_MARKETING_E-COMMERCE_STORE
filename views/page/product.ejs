@@ -16,215 +16,437 @@
 
 
   <style>
-    .nameprice{
-      margin-top: 40px;
-    }
-
-.colorarea>select{
- width: 100px;
-margin-top: 40px;
- font-size: medium;
- margin-left: 10px;
- margin-bottom: 20px;
+/* ===========================
+   GLOBAL RESET / BASE
+=========================== */
+body, html {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
+.container, .row {
+  max-width: 100%;
+}
+
+/* ===========================
+   PRODUCT PAGE LAYOUT
+=========================== */
+.nameprice {
+  margin-top: 40px;
+}
+
+.colorarea > select {
+  width: 100px;
+  margin-top: 40px;
+  font-size: medium;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+/* Carousel / Main Product Image */
 .carousel,
-      .carousel-inner,
-    .carousel-item img {
-        width: 80%!important;
-        margin-left: 100px;
-        margin-top: 10px;
-        max-height: 750px;
-        object-fit:contain;
-       
-        border-radius:5%;
-      }
+.carousel-inner,
+.carousel-item img {
+  width: 80% !important;
+  margin-left: 100px;
+  margin-top: 10px;
+  max-height: 750px;
+  object-fit: contain;
+  border-radius: 5%;
+}
 
-  
+/* ===========================
+   PRODUCT MAIN IMAGE SECTION
+=========================== */
+.main-image-box {
+  width: 100%;
+  text-align: center;
+}
 
-    /* Mobile adjustments */
+.main-product-img {
+  width: 100%;
+  max-height: 600px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* Thumbnails */
+.thumb-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+@media (min-width: 900px) {
+  .thumb-wrapper {
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .cake {
+    padding-top: 30px;
+  }
+}
+
+.thumb-container {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 5px 0;
+  width: 400px;
+}
+
+/* Hide scrollbar */
+.thumb-container::-webkit-scrollbar {
+  display: none;
+}
+.thumb-container {
+  scrollbar-width: none;
+}
+
+.thumb-img {
+  width: 80px;
+  height: 80px;
+  min-width: 100px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 6px;
+  cursor: pointer;
+  background: #fff;
+  transition: 0.2s ease;
+}
+
+.thumb-img:hover {
+  border-color: #000;
+  transform: scale(1.05);
+}
+
+.active-thumb {
+  border: 2px solid #000;
+}
+
+/* Arrow buttons */
+.thumb-arrow {
+  background: #fff;
+  border: 1px solid #ccc;
+  font-size: 22px;
+  padding: 4px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* ===========================
+   PRODUCT INFO SECTION
+=========================== */
+.product-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.price-area {
+  margin-top: 8px;
+}
+
+.selling-price {
+  color: #e53935;
+  font-size: 22px;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #777;
+  margin-right: 8px;
+}
+
+.discount {
+  color: #388e3c;
+  font-weight: 600;
+}
+
+.cart {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 6px;
+}
+
+.color-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.color-box.active {
+  outline: 2px solid #000;
+}
+
+.product-description {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 14px;
+}
+
+.desc-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.desc-text {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.color_heading {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* ===========================
+   NAVBAR FIX + MOBILE SUPPORT
+=========================== */
+.navbar-brand img {
+  width: 100px;
+  height: auto; /* keeps aspect ratio */
+}
+
+/* <= 992px */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    padding-top: 1rem;
+  }
+
+  .navbar form {
+    margin-left: 0 !important;
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  .navbar .d-flex {
+    margin-left: 0 !important;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+/* ===========================
+   MOBILE RESPONSIVE (<= 768px)
+=========================== */
 @media (max-width: 768px) {
- 
- 
 
   .nameprice {
     display: flex;
-    justify-content: space-between; /* Spread product name & price */
-    align-items: center;
-    margin: 0 20px;
+    flex-direction: column;
+  }
+
+  .product-title {
+    font-size: 22px;
+    margin-left: 20px;
+  }
+
+  .price-area {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    margin-left: 20px;
+    margin-top: -5px;
+  }
+
+  .selling-price,
+  .original-price,
+  .discount {
+    font-size: 15px;
   }
 
   .category {
-    display: flex;
-    justify-content: end;
-    margin-right: 18px;
-    opacity: 0.5;
+    margin-right: 120px;
+    margin-top: 10px;
   }
-.colorarea>select{
- width: 90px;
- height: 30px;
- font-size: small;
- margin-left: 10px;
- margin-top: -2px;
-}
 
   .size {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 15px 0 40px 0; /* top + bottom spacing */
+    margin-left: 20px;
   }
 
-  .cart {
-    display: block;
-    width: 90%;
-    max-width: 370px;
-    margin: 20px auto; /* centered with spacing */
+  .color {
+    margin-left: 130px !important;
   }
 
-  .colorarea {
-  position: relative;
-  top: -220px;
-  
-
+  .product-description {
+    margin-left: 10px;
   }
 
-
-
-  .cake {
-    font-size: 18px;
-    margin: 30px 20px; /* spacing instead of pushing */
+  .desc-title {
+    text-align: center;
   }
- 
-}
 
-    /* General responsive tweaks */
-    @media (max-width: 991.98px) {
-      .carousel,
-      .carousel-inner,
-      .carousel-item img {
-        width: 100%!important;
-          
-        max-height: 450px;
-        object-fit:contain;
-        margin: 0!important;
-        padding: 0!important;
-        border-radius: 5%;
-      }
-      .fontstyle, .price, .cake {
-        text-align: center;
-      }
-    }
-    
+  .colorarea > select {
+    width: 90px;
+    height: 30px;
+    font-size: small;
+    margin-top: -2px;
+    margin-left: 10px;
+  }
+
+  .main-product-img {
+    max-height: 420px;
+  }
+
+  .thumb-img {
+    width: 65px;
+    height: 65px;
+  }
+
+  .color_heading {
+    display: none;
+  }
+
+  .carousel,
+  .carousel-inner,
+  .carousel-item img {
+    width: 100% !important;
+    max-height: 450px;
+    object-fit: contain;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}  
+
   </style>
 </head>
 <body>
   
   
-<!--NAVBAR--> 
+
 <header class="sticky-top bg-white shadow-sm">
-  <nav class="navbar navbar-expand-lg container ">
-    <div class="container-fluid  navbarcontent   ">
-      <!-- Logo/Brand -->
- <!-- Logo/Brand -->
-  <div class="navbar-brand" href="#">
-    <img class="img-fluid" src="Bl_logo.png" alt="Bl_logo">
-</div>      
-      <!-- Mobile Toggle -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <!-- Main Content -->
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <!-- Menu -->
-        <ul class="navbar-nav gap-lg-4 gap-2 ms-lg-5 ps-lg-5 mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="/sportswear">Sportswear</a></li>
-          <li class="nav-item"><a class="nav-link" href="/WOMEN">Women</a></li>
-          <li class="nav-item"><a class="nav-link" href="/SOCKS">Socks </a></li>
-        </ul>
+    <nav class="navbar navbar-expand-lg container ">
+      <div class="container-fluid  navbarcontent   ">
+        <!-- Logo/Brand -->
+        <div class="navbar-brand " href="#">  <img class="img-fluid" src="/Bl_logo.png" alt="Bl_logo"></div>
         
-        <!-- Search -->
-        <form class="d-flex ms-lg-5 me-lg-0 mx-auto my-2 my-lg-0" role="search"  action="/search" method="get"  >
-          <div class="input-group   ">
-            <input class="form-control" type="search" placeholder="Search" name="q">
-            <button class="btn btn-outline-secondary" type="submit">
-              <i class="fas fa-search"></i>
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Main Content -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <!-- Menu -->
+          <ul class="navbar-nav gap-lg-4 gap-2 ms-lg-5 ps-lg-5 mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sportswear">Sportswear</a></li>
+            <li class="nav-item"><a class="nav-link" href="/WOMEN">Women</a></li>
+            <li class="nav-item"><a class="nav-link" href="/SOCKS">Socks </a></li>
+          </ul>
+          
+          <!-- Search -->
+          <form class="d-flex ms-lg-5 me-lg-0 mx-auto my-2 my-lg-0" role="search"  action="/search" method="get"  >
+            <div class="input-group   ">
+              <input class="form-control" type="search" placeholder="Search" name="q">
+              <button class="btn btn-outline-secondary" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </form>
+          
+          <!-- Actions -->
+          <div class="d-flex gap-2 align-items-center ms-lg-5">
+          
+            <% if(!user){ %>
+            <!-- Login button -->
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signInModal">
+              Sign In
+            </button>
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+             Login
+            </button>
+            <% }else{ %>
+              <button  class="btn btn-dark  rounded-pill" onclick="window.location.href='/order/my-orders'" style="font-size: small;"  >MY ORDER</button>
+
+            <form action="/auth/logout" method="post">
+            <button type="submit" class="btn fs-6 " >
+             <i class="fas fa-sign-out-alt"></i>
+            </button>
+            </form>
+            <% } %>
+            
+            <button class="btn position-relative p-1">
+              <a href="/cart"><i class="fas fa-shopping-cart fs-5"></i></a>
             </button>
           </div>
-        </form>
-        
-        <!-- Actions -->
-        <div class="d-flex gap-2 align-items-center ms-lg-5">
-        
-        
-       
-
-
-<!-- Cart button -->
-
-
- <% if(!user){ %>
-  <!-- Login button -->
-  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signInModal">
-    Sign In
-  </button>
-  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
-   Login
-  </button>
-  <% }else{ %>
-    <button  class="btn btn-primary  rounded-pill" onclick="window.location.href='/order/my-orders'" style="font-size: small;"  >MY ORDER</button>
-
-  <form action="/auth/logout" method="post">
-  <button type="submit" class="btn fs-6 " >
-   <i class="fas fa-sign-out-alt"></i>
-  </button>
-
-  </form>
-  <% } %>
-  <button class="btn position-relative p-1">
-    <a href="/cart"><i class="fas fa-shopping-cart fs-5"></i></a>
-   </button>
-
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 </header>
+<% if (error) { %>
+  <div class="alert text-center alert-danger">
+    <%= error %>
+  </div>
+<% } %>
 
 
   <!-- PRODUCT SECTION -->
   <div class="container ">
     <div class="row g-4">
       
-      <!-- Product Image / Carousel -->
-      <div class="col-lg-8   product  ">
-        <div id="carouselExampleFade" class="carousel slide carousel-fade">
-          <div class="carousel-inner">
-            <picture>
-              <source  media="(max-width: 768px)" srcset="<% product.mobile_image_url %>">
-              <source media="(min-width: 768px)" srcset="<% product.desktop_image_url %>">
-              <img src="<%= product.desktop_image_url %>" class="d-block w-100" alt="Product Image">
-            </picture>
-          </div>
-          <button class="carousel-control-prev btn-outline-dark" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-          </button>
-        </div>
-      </div>
+     <!-- PRODUCT IMAGE GALLERY -->
+<div class="col-lg-8 product">
+
+  <!-- MAIN IMAGE -->
+  <div class="main-image-box">
+    <img
+      id="mainProductImage"
+      src="/<%= product.images %>"
+      class="main-product-img"
+      alt="Product Image"
+    >
+  </div>
+
+  <!-- THUMBNAILS -->
+  <div class="thumb-wrapper">
+    <button class="thumb-arrow" onclick="scrollThumbs(-1)">‹</button>
+
+    <div class="thumb-container" id="thumbContainer">
+      <% product.images.forEach((img, index) => { %>
+        <img
+          src="/<%= img %>"
+          class="thumb-img <%= index === 0 ? 'active-thumb' : '' %>"
+          onclick="changeMainImage(this)"
+        >
+      <% }) %>
+    </div>
+
+    <button class="thumb-arrow" onclick="scrollThumbs(1)">›</button>
+  </div>
+
+</div>
+
+
 
       <!-- Product Info -->
       <div class="col-12 col-lg-4 mt-4 mt-lg-0">
-        <div class="nameprice">
-          <p class="fontstyle    fw-bold  "><%= product.name %></p>
-          <p class="price"><%= product.price %></p>
-        </div>
+       <div class="nameprice">
+  <p class="product-title"><%= product.name %></p>
+
+  <div class="price-area">
+    <span class="selling-price">₹<%= product.price %></span>
+    <div class="main-price"  >   
+    <span class="original-price">₹<%= product.discount %></span>
+    <span class="discount">(50% OFF)</span>
+     </div>
+  </div>
+</div>
         <p class="category     "><%= product.category %></p>
-<form action="/cart/add/<%= product.category %>/<%= product.id %>" method="GET">
+<form action="/cart/add/<%= product.category %>/<%= product.id %>" method="post">
         <!-- Size selection -->
         <p class="mt-4 fw-bold fontstyle">Size</p>
         <div class="size mt-2 d-flex flex-wrap gap-2" name="size"  >
@@ -237,21 +459,61 @@ margin-top: 40px;
         
 
         <!-- Add to Cart -->
-        <button class="btn btn-dark fw-bold mt-4 cart text-white" type="submit">ADD TO CART</button>
 
         <!-- Color selection -->
-        <div class="colorarea">
-          
-          <select name="color" class="form-select color">
-            <option value="" disabled selected> Color</option>
-            <% product.colors.forEach(color => { %>
-              <option value="<%= color %>"><%= color %></option>
-            <% }) %>
-          </select>
-          
-        
-        </div>
+      <div class="colorarea mt-4">
+
+        <h2 class="color_heading   ">Color</h2>
+
+  <!-- Desktop Color Boxes -->
+  <div class="color-boxes d-none d-lg-flex gap-2">
+    <% product.colors.forEach(color => { %>
+      <div class="color-box" style="background:<%= color %>" data-color="<%= color %>"></div>
+    <% }) %>
+  </div>
+  <input type="hidden" name="color" id="selectedColor">
+<input type="number"  name="quantity" value="1" hidden>
+
+  <!-- Mobile Dropdown -->
+  <select id="mobilecolor" class="form-select color d-lg-none mt-2">
+    <option value="" disabled selected>Color</option>
+    <% product.colors.forEach(color => { %>
+      <option value="<%= color %>"><%= color %></option>
+    <% }) %>
+  </select>
+
+</div>
+
+
+        <button class="btn btn-dark fw-bold mt-4 cart text-white" type="submit">ADD TO CART</button>
+
+
+
+
+
 </form>
+
+
+
+<!-- Product Description -->
+<div class="product-description mt-4">
+  <p class="desc-title">Product Details</p>
+
+  <p class="desc-text">
+   <%= product.description %>
+  </p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
         <!-- Product Info (Delivery/Return/COD) -->
         <div class="mt-3 cake">
           <p class="d-flex align-items-center gap-2"><i class="fas fa-truck"></i> Free Delivery Above ₹999</p>
@@ -263,7 +525,6 @@ margin-top: 40px;
   </div>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
   <script>
@@ -275,6 +536,53 @@ margin-top: 40px;
         this.classList.add("btn-dark");
       });
     });
+
+
+ function changeMainImage(el) {
+    document.getElementById("mainProductImage").src = el.src;
+
+    document.querySelectorAll(".thumb-img")
+      .forEach(img => img.classList.remove("active-thumb"));
+
+    el.classList.add("active-thumb");
+  }
+
+  function scrollThumbs(direction) {
+    document.getElementById("thumbContainer").scrollLeft += direction * 120;
+     console.log("Scrolling:", direction);
+  }
+
+
+
+  document.querySelectorAll(".color-box").forEach(box => {
+    box.addEventListener("click", () => {
+      document.querySelectorAll(".color-box").forEach(b => b.classList.remove("active"));
+      box.classList.add("active");
+      document.querySelector("select[name='color']").value = box.dataset.color;
+    });
+  });
+
+
+
+  const colorSelect = document.querySelector("#selectedColor");
+
+  document.querySelectorAll(".color-box").forEach(box =>{
+
+    box.addEventListener("click", () => {
+
+    const color = box.dataset.color;
+     colorSelect.value = color;
+    });
+
+  })
+
+
+  document.getElementById("mobilecolor").addEventListener("change", (e) =>{
+    colorSelect.value = e.target.value;
+  } )
+
+
+
   </script>
 </body>
 </html>

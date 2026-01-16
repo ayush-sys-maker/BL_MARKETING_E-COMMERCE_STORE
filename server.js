@@ -5,12 +5,17 @@ import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import Razorpay from "razorpay";
 import dotenv from "dotenv";
+
+
+dotenv.config();
+
+
 import methodOverride from "method-override";
 import data from "./data/data.js";
 
 
 
-dotenv.config();
+
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -24,10 +29,10 @@ app.set("views", path.join(__dirname, "views"));
 
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "uploads")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
-
 // ✅ Session store with Render PostgreSQL
 const PgSession = connectPgSimple(session);
 
@@ -64,6 +69,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+
+
 // Import routes
 import homeroute from "./routes/MEN.js";
 import productroute from "./routes/product.js";
@@ -78,6 +86,19 @@ import auth from "./routes/auth.js";
 import search from "./routes/search.js";
 import order from "./routes/order.js";
 import whatsapp from "./routes/whatsapp.js";
+import admin from "./routes/adminpanel.js";
+import  view from "./routes/view.js";
+import adminAuthRoute from "./routes/adminauth.js";
+
+
+
+
+
+
+
+
+
+
 
 // Use routes
 app.use("/MEN", homeroute);
@@ -93,10 +114,24 @@ app.use("/auth", auth);
 app.use("/search", search);
 app.use("/order", order);
 app.use("/whatsapp", whatsapp);
+app.use("/admin", admin);
+app.use("/view", view);
+app.use("/admin-auth", adminAuthRoute);
+
 
 app.get("/", (req, res) => {
     res.render('page/home');
 });
+
+app.get("/admin/login", (req, res) => {
+  res.render("page/adminloginpage");
+});
+
+
+console.log("DATABASE_URL exists:", !!process.env.DATABASE_URL);
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log(process.env.DATABASE_URL)
+
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`✅ Server is running on port ${PORT}`);

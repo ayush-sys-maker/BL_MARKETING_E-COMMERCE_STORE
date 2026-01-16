@@ -44,6 +44,9 @@
     
   }
 
+
+  
+
   </style>
 
 </head>
@@ -127,20 +130,44 @@
   <div class="pro container-fluid justify-content-center mt-5">
     <div class="row g-3">
       <% feature.forEach(product => { %>
-        <div onclick="window.location.href='/products/<%= product.id %>'" class="col-6 col-sm-6 col-md-4 col-lg-3 productcard">
-          <div class="product-card p-3 border rounded" style="cursor: pointer;">
-            <img  src="<%= product.mobile_image_url %>" class="img-fluid rounded mb-2 w-100">
-            <p class="text-danger mb-1"><%= product.price %></p>
-            <p class="fw-bold mb-1 mt-2"><%= product.name %></p>
-            <p class="text-muted small mt-2 mb-1"><%= product.category %></p>
+        <div 
+          onclick="window.location.href='/products/<%= product.id %>'" 
+          class="col-6 col-sm-6 col-md-4 col-lg-3 productcard"
+        >
+          <div class="product-card p-3 border rounded">
+
+            <!-- PRODUCT NAME (TOP) -->
+            <p class="product-name mb-2">
+              <%= product.name %>
+            </p>
+
+            <!-- IMAGE -->
+            <img 
+              src="<%= product.images %>" 
+              class="product-img img-fluid rounded mb-3 w-100"
+            >
+
+            <!-- PRICE ROW -->
+            <div class="price-row">
+              <span class="price-new">
+                ₹<%= product.price %>
+              </span>
+              <span class="price-old">
+                ₹ 699
+              </span>
+            </div>
+
+            <!-- CATEGORY (KEEP SAME POSITION) -->
+            <p class="text-muted small mt-2 mb-1">
+              <%= product.category %>
+            </p>
+
           </div>
         </div>
       <% }) %>
     </div>
   </div>
 </section>
-
-
 
 
 
@@ -327,6 +354,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+
+
+ function changeMainImage(el) {
+    document.getElementById("mainProductImage").src = el.src;
+
+    document.querySelectorAll(".thumb-img")
+      .forEach(img => img.classList.remove("active-thumb"));
+
+    el.classList.add("active-thumb");
+  }
+
+  function scrollThumbs(direction) {
+    document.getElementById("thumbContainer").scrollLeft += direction * 120;
+  }
+
+
+
+
+
   
   
   </script>

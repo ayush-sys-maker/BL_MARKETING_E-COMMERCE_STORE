@@ -8,29 +8,35 @@ router.use((req, res, next) => {
   next();
 });
 
-// Add to cart (DB-backed)
-router.get("/add/:category/:id", async (req, res) => {
+router.post("/add/:category/:id", async (req, res) => {
   try {
     const { category, id } = req.params;
     const userid = req.session.user?.id;
-    const color = req.query.color;
-    const size = req.query.size;
+
+    const { color, size, quantity } = req.body;
 
     if (!userid) {
       return res.status(401).send("Please login to add to cart");
     }
 
     if (!size) {
-            return res.status(400).send('Please select a size');
-        }
+      return res.redirect(`/products/${id}?error=Please select a size`);
+    }
 
-        const productidInt = parseInt(id);
-        if (isNaN(productidInt)) {
-            return res.status(400).send('Invalid product ID');
-        }
+    const productidInt = parseInt(id);
+    if (isNaN(productidInt)) {
+      return res.status(400).send("Invalid product ID");
+    }
 
+    await productRepository.AddToCart(
+      userid,
+      category,
+      productidInt,
+      color,
+      size,
+      Number(quantity)
+    );
 
-    await productRepository.AddToCart(userid, category, productidInt, color, size);
     return res.redirect("/cart");
   } catch (err) {
     console.error("Error adding to cart:", err);
@@ -44,8 +50,29 @@ router.get("/", async (req, res) => {
     const userid = req.session.user?.id;
     if (!userid) return res.status(401).send("Please login to view cart");
 
-    const cart = await productRepository.getCart(userid) || [];
-    const total = cart.reduce((sum, item) => sum + (Number(item.price) || 0), 0);
+    let cart = await productRepository.getCart(userid) || [];
+
+     
+const total = cart.reduce( (sum, item) =>  sum + (Number(item.price) || 0) * (Number(item.quantity) || 1), 0);
+
+
+cart = cart.map(item =>{
+  let img = item.images
+
+  img = img.replace(/[{}]/g, "");
+
+  // remove escaped slashes
+  img = img.replace(/\\\\/g, "/");
+
+  // remove quotes
+  img = img.replace(/"/g, "");
+
+  item.images = img; // single string path
+
+  return item
+})
+
+
 
     console.log("Cart for user", userid, cart);
     return res.render("page/cart", { cart, total, user: req.session.user });
@@ -70,4 +97,22 @@ router.post("/remove/:id", async (req, res) => {
   }
 });
 
+
+router.post ("/update-quantity", async (req, res) => {
+try {
+const userid = req.session.user?.id;
+if (!userid) return res.status(401).send("Please login to modify cart");
+
+const { quantity ,cartId } = req.body;
+
+ const result =  await productRepository.updateCartItemQuantity(userid, cartId, quantity);
+console.log("Rows updated:", result.rowCount); 
+res.json({ success: true });
+
+}catch (err) {
+console.error("Error updating cart:", err);
+return res.status(500).send("Failed to update item");
+}
+
+})
 export default router;

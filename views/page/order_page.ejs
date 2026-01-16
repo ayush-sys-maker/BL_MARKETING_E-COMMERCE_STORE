@@ -82,6 +82,42 @@
     margin-left: 0 !important;
   }
 }
+
+
+.navbar-brand>img{
+       width: 100px;
+       height: 100px;
+        }
+
+      
+
+          @media (min-width: 992px) {
+            .navbar .d-flex {
+                margin-left: 250px;
+            }
+            .navbar form {
+                margin-left: 3rem;
+            }
+            .mob{
+              display: none;
+            }
+            .navbar{
+            height: 60px;
+            }
+        }
+        
+
+         @media (max-width: 992px) {
+           @media (max-width: 991.98px) {
+    .navbar .d-flex {
+        margin-left: 0 !important;
+        justify-content: flex-start;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+            
+        }
     </style>
 </head>
 <body>
@@ -92,8 +128,9 @@
   <nav class="navbar navbar-expand-lg container py-3">
     <div class="container-fluid">
       <!-- Logo/Brand -->
-      <a class="navbar-brand fw-bold" href="#">   BL MARKETING</a>
-      
+<div class="navbar-brand" href="#">
+        <img class="img-fluid" src="/Bl_logo.png" alt="Bl_logo">
+      </div>         
       <!-- Mobile Toggle -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
         <span class="navbar-toggler-icon"></span>

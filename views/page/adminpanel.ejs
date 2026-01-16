@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN-PANEL</title>
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@301&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="homecss.css">
+<style>
+    /* Full height center */
+.dashboard-wrapper {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+/* Card styling */
+.dashboard-card {
+  padding: 20px;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  transition: transform 0.2s ease;
+  width: 200px;
+  
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Text styles */
+.card-title {
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 8px;
+}
+
+.card-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #212529;
+}
+
+/* Mobile adjustments (still horizontal) */
+@media (max-width: 576px) {
+  .dashboard-card {
+    padding: 12px;
+  }
+
+  .card-title {
+    font-size: 12px;
+  }
+
+  .card-value {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .dashboard-row {
+    column-gap: 64px; /* 20–30px gap as requested */
+  }
+
+  .dashboard-card {
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .dashboard-wrapper {
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+}
+
+/* Mobile: still horizontal, but smaller squares */
+@media (max-width: 767px) {
+  .dashboard-card {
+  width: 100px; 
+
+  
+  }
+  .dashboard-wrapper{
+    height: 20vh;
+  }
+}
+
+/* Main container */
+.order-card {
+  display: flex;
+ 
+  align-items: center;
+  gap: 24px;
+  padding: 14px 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  margin-bottom: 16px;
+  width: 80%;
+  margin-left: 10%;
+}
+
+/* Image */
+.order-image img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Text blocks */
+.order-item {
+  min-width: 110px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.value {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Order ID slightly wider */
+.order-id {
+  min-width: 160px;
+}
+
+/* Action button */
+.order-action {
+  margin-left: auto;
+}
+
+.view-btn {
+  padding: 8px 16px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.order-item {
+  min-width: 130px;
+}
+
+.order-id {
+  min-width: 160px;
+}
+
+.view-btn:hover {
+  background: #1e40af;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .order-card {
+    gap: 14px;
+    padding: 12px;
+   
+  }
+
+  .order-image img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .value {
+    font-size: 14px;
+  }
+
+  .view-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+
+/* Main container */
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 14px 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  margin-bottom: 16px;
+  width: 80%;
+    margin-left: 10%;
+    margin-top: 20px;
+}
+
+/* Image */
+.user-image img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+}
+
+/* Text blocks */
+.user-item {
+  min-width: 140px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.value {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Status badge */
+.status {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.status.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.blocked {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Action button */
+.user-action {
+  margin-left: auto;
+}
+
+.block-btn {
+  padding: 8px 16px;
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.block-btn:hover {
+  background: #991b1b;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .user-card {
+    gap: 14px;
+    padding: 12px;
+  }
+
+  .user-image img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .user-item {
+    min-width: auto;
+  }
+
+  .value {
+    font-size: 14px;
+  }
+
+  .block-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Wrapper */
+.user-search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 520px;
+  width: 100%;
+  padding: 10px 14px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+  margin-left: 35%;
+  margin-top: 20px;
+}
+
+/* Input */
+.user-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #111827;
+}
+
+.user-search-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Button */
+.user-search-btn {
+  padding: 8px 18px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.user-search-btn:hover {
+  background: #1e40af;
+}
+
+/* Mobile responsive */
+@media (max-width: 576px) {
+  .user-search-wrapper {
+    padding: 8px 10px;
+    gap: 8px;
+    margin-left: 10%;
+    width: 80%;
+  }
+
+  .user-search-input {
+    font-size: 14px;
+  }
+
+  .user-search-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+
+
+
+/* Main product row */
+.product-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 14px 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  margin-bottom: 14px;
+  width: 80%;
+   
+}
+
+.product-container {
+    display: grid;
+    grid-template-rows: repeat(3, auto); /* Show 3 items before scroll */
+    gap: 10px;
+    max-height: 200px; /* Adjust height based on your row height */
+    overflow-y: auto; /* Enable vertical scroll */
+    padding-right: 5px;
+    margin-left: 20%;
+}
+
+.product-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Product image */
+.product-image img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Text blocks */
+.product-item {
+  min-width: 130px;
+}
+
+.product-name {
+  min-width: 180px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Delete button */
+.product-action {
+  margin-left: auto;
+}
+
+.delete-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #fecaca;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .product-row {
+    gap: 14px;
+    padding: 12px;
+  }
+
+  .product-image img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .product-item,
+  .product-name {
+    min-width: auto;
+  }
+
+  .value {
+    font-size: 13px;
+  }
+}
+
+
+/* Wrapper */
+.product-form-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+  width: 80%;
+  margin-left: 10%;
+}
+
+/* Shared box styles */
+.product-image-box,
+.product-details-box {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* Titles */
+.box-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+/* Image section */
+.image-preview {
+  width: 100%;
+  height: 180px;
+  border: 2px dashed #d1d5db;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.image-preview img {
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.image-input {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.helper-text {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Form styles */
+.product-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+}
+
+/* Full width textarea */
+.full-width {
+  grid-column: span 2;
+}
+
+/* Actions */
+.form-actions {
+  grid-column: span 2;
+  text-align: right;
+}
+
+.save-btn {
+  padding: 10px 20px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background: #1e40af;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .product-form-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .product-form {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width,
+  .form-actions {
+    grid-column: span 1;
+  }
+}
+
+
+.preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.preview-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.remove-btn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+
+</style>
+
+
+</head>
+<body>
+
+ 
+<!--NAVBAR--> 
+<header class="sticky-top bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg container ">
+      <div class="container-fluid  navbarcontent   ">
+        <!-- Logo/Brand -->
+        <div class="navbar-brand " href="#">  <img class="img-fluid" src="Bl_logo.png" alt="Bl_logo"></div>
+        
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Main Content -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <!-- Menu -->
+          <ul class="navbar-nav gap-lg-4 gap-2 ms-lg-5 ps-lg-5 mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sportswear">Sportswear</a></li>
+            <li class="nav-item"><a class="nav-link" href="/WOMEN">Women</a></li>
+            <li class="nav-item"><a class="nav-link" href="/SOCKS">Socks </a></li>
+          </ul>
+          
+          <!-- Search -->
+          <form class="d-flex ms-lg-5 me-lg-0 mx-auto my-2 my-lg-0" role="search"  action="/search" method="get"  >
+            <div class="input-group   ">
+              <input class="form-control" type="search" placeholder="Search" name="q">
+              <button class="btn btn-outline-secondary" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </form>
+          
+          <!-- Actions -->
+          <div class="d-flex gap-2 align-items-center ms-lg-5">
+          
+            <% if(!user){ %>
+            <!-- Login button -->
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signInModal">
+              Sign In
+            </button>
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+             Login
+            </button>
+            <% }else{ %>
+              <button  class="btn btn-dark  rounded-pill" onclick="window.location.href='/order/my-orders'" style="font-size: small;"  >MY ORDER</button>
+
+            <form action="/auth/logout" method="post">
+            <button type="submit" class="btn fs-6 " >
+             <i class="fas fa-sign-out-alt"></i>
+            </button>
+            </form>
+            <% } %>
+            
+            <button class="btn position-relative p-1">
+              <a href="/cart"><i class="fas fa-shopping-cart fs-5"></i></a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+<!-- ADMIN 1 SECTION -->
+
+
+<H2 class="text-center mt-5"  > ADMIN PANEL</H2>
+
+ <div class="container-fluid dashboard-wrapper">
+    <div class="row  justify-content-center align-items-center dashboard-row">
+
+      <!-- Users Box -->
+      <div class="col-4 col-md-3">
+        <div class="card dashboard-card text-center">
+          <h6 class="card-title">Total Users</h6>
+          <h3 class="card-value"><%=TotalUsers %></h3>
+        </div>
+      </div>
+
+      <!-- Revenue Box -->
+      <div class="col-4 col-md-3">
+        <div class="card dashboard-card text-center">
+          <h6 class="card-title">Revenue</h6>
+          <h3 class="card-value">₹<%= TotalRevenue %></h3>
+        </div>
+      </div>
+
+      <!-- Orders Box -->
+      <div class="col-4 col-md-3">
+        <div class="card dashboard-card text-center">
+          <h6 class="card-title">Orders</h6>
+          <h3 class="card-value"><%= TotalOrders %></h3>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<!-- ADMIN 2 SECTION -->
+
+
+
+
+  <h2  class="text-center mt-3 "  >  ORDERS</h2>
+
+
+
+<% Orders.forEach(function (order)  {    %>
+
+<div class="order-card mt-3">
+  <!-- Product Image -->
+
+  <!-- User Name -->
+  <div class="order-item">
+    <span class="label">User</span>
+    <span class="value"><%= order.name %></span>
+  </div>
+
+  <!-- Order Date -->
+  <div class="order-item">
+    <span class="label">Order Date</span>
+    <span class="value"><%= order.order_date %></span>
+  </div>
+
+  <!-- Total Price -->
+  <div class="order-item">
+    <span class="label">Total</span>
+    <span class="value"><%= order.total_amount%></span>
+  </div>
+
+  <!-- Quantity -->
+  <div class="order-item">
+    <span class="label">Qty</span>
+    <span class="value"><%= order.quantity %></span>
+  </div>
+
+  <div>
+ <span class="label">Status</span>
+<span class="value">
+  <% if (order.is_cancel === true) { %>
+    <span class="badge bg-danger">Cancelled</span>
+  <% } else { %>
+    <span class="badge bg-success">Active</span>
+  <% } %>
+</span>
+  </div>
+
+  <!-- Order ID -->
+  <div class="order-item order-id  ms-5  ">
+    <span class="label">Order ID</span>
+    <span class="value"><%= order.order_id %></span>
+  </div>
+
+  <!-- View Button -->
+  <div class="order-action">
+    <form action="/view/<%= order.order_id %>" method="get">
+    <button class="view-btn">View More</button>
+    </form>
+  </div>
+ 
+</div>
+ <% }) %>
+
+
+
+
+<!--USER CONTROL-->
+
+
+<h2 class="text-center mt-5"    >USER CONTROL</h2>
+
+<div class="user-search-wrapper">
+  <input
+    type="text"
+    class="user-search-input"
+    placeholder="Search users by name, email, or phone…"
+  />
+  <button class="user-search-btn">Search</button>
+</div>
+<% RecentUsers.forEach(function(user){ %>
+<div class="user-card">
+  <!-- User Image -->
+  <div class="user-image">
+    <img src="https://via.placeholder.com/70" alt="User">
+  </div>
+
+  <!-- User Name -->
+  <div class="user-item">
+    <span class="label">Name</span>
+    <span class="value"><%= user.name %></span>
+  </div>
+
+  <!-- Last Login -->
+  <div class="user-item">
+    <span class="label">Acc Created</span>
+    <span class="value"><%= new Date(user.created_at).toLocaleDateString() %></span>
+  </div>
+
+  <!-- Status -->
+  <div class="user-item">
+    <span class="label">Status</span>
+    <span class="status active">Active</span>
+  </div>
+
+  <!-- Action -->
+  <div class="user-action">
+    <form action="/admin/delete_user/<%= user.id %>"  method="get"  >
+    <button class="block-btn">Block</button>
+    </form>
+  </div>
+</div>
+
+<% }) %>
+
+<h2 class="text-center"  >PRODUCT LIST</h2>
+<div class="product-container">
+  
+<% AllProducts.forEach(function(product){ %>
+
+<div class="product-row">
+  <!-- Product Image -->
+  <div class="product-image">
+    <img src="<%=product.mobile_image_url %>" alt="Product">
+  </div>
+
+  <!-- Product ID -->
+  <div class="product-item">
+    <span class="label">Product ID</span>
+    <span class="value"><%= product.id %></span>
+  </div>
+
+  <!-- Product Name -->
+  <div class="product-item product-name">
+    <span class="label">Name</span>
+    <span class="value"><%= product.name %></span>
+  </div>
+
+  <!-- Price -->
+  <div class="product-item">
+    <span class="label">Price</span>
+    <span class="value">₹<%= product.price %></span>
+  </div>
+
+  <!-- Colors -->
+  <div class="product-item">
+    <span class="label">Colors</span>
+    <span class="value"><%=product.color %></span>
+  </div>
+
+  <!-- Sizes -->
+  <div class="product-item">
+    <span class="label">Sizes</span>
+    <span class="value"><%= product.size %></span>
+  </div>
+
+  <!-- Delete Action -->
+  <div class="product-action">
+    <form action="/admin/delete_product/<%= product.id %>"  method="get"  >
+    <button class="delete-btn" title="Delete Product">✕</button>
+    </form>
+  </div>
+</div>
+
+<% }) %>
+
+
+</div>
+<form action="/admin/add_product" method="POST" enctype="multipart/form-data">
+<div class="product-form-wrapper">
+
+  <!-- LEFT: Image Upload Box -->
+  <div class="product-image-box">
+  <h3 class="box-title">Product Images</h3>
+
+  <div id="preview-container" class="preview-container"></div>
+
+  <input type="file" id="image-input" name="images" class="image-input" multiple accept="image/*">
+
+  <p class="helper-text">Upload clear product images (JPG, PNG)</p>
+</div>
+
+  <!-- RIGHT: Product Details Form -->
+  <div class="product-details-box">
+    <h3 class="box-title">Product Details</h3>
+
+    <div class="product-form">
+
+      <div class="form-group">
+        <label>Product Name</label>
+        <input name="Pname"  type="text" placeholder="Enter product name">
+      </div>
+
+      <div class="form-group">
+        <label>Price</label>
+        <input name="price" type="number" placeholder="Enter price">
+      </div>
+
+      <div class="form-group">
+        <label>Discounted Price</label>
+        <input name="discounted_price" type="number" placeholder="Enter discounted price">
+      </div>
+
+      <div class="form-group">
+        <label>Available Colors</label>
+        <input name="color" type="text" placeholder="Eg: Black, Blue, Grey">
+      </div>
+
+      <div class="form-group">
+        <label>Available Sizes</label>
+        <input name="size" type="text" placeholder="Eg: S, M, L, XL">
+      </div>
+
+      <div class="form-group">
+        <label>Category</label>
+        <input name="category" type="text" placeholder="Eg: Sportswear">
+      </div>
+
+      <div class="form-group full-width">
+        <label>Description</label>
+        <textarea name="description" rows="4" placeholder="Write product description"></textarea>
+      </div>
+
+      <button type="submit" class="save-btn">Save Product</button>
+
+    </div>
+  </div>
+
+</div>
+</form>
+
+</div>
+
+ 
+
+
+<!-- Sign In Modal -->
+<div class="modal fade" id="signInModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sign In</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form  action="/auth/signup" method="post"   >
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control w-100 " required autocomplete="off" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="username" class="form-control w-100 " required autocomplete="off" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control  w-100 " required  autocomplete="new-password" >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Sign In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/auth/login" method="post"   >
+          <div class="mb-3  ">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control w-100 " required  autocomplete="off" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control  w-100 " required  autocomplete="new-password"  >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script>
+   const input = document.getElementById('image-input');
+  const previewContainer = document.getElementById('preview-container');
+  let selectedFiles = [];
+
+  input.addEventListener('change', (event) => {
+    const files = Array.from(event.target.files);
+
+    files.forEach(file => {
+      selectedFiles.push(file);
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const div = document.createElement('div');
+        div.classList.add('preview-item');
+
+        div.innerHTML = `
+          <img src="${e.target.result}" alt="preview">
+          <button class="remove-btn">&times;</button>
+        `;
+
+        previewContainer.appendChild(div);
+
+        // Remove image functionality
+        div.querySelector('.remove-btn').addEventListener('click', () => {
+          const index = selectedFiles.indexOf(file);
+          selectedFiles.splice(index, 1);
+          div.remove();
+          updateFileInput();
+        });
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    updateFileInput();
+  });
+
+  function updateFileInput() {
+    const dataTransfer = new DataTransfer();
+    selectedFiles.forEach(file => dataTransfer.items.add(file));
+    input.files = dataTransfer.files;
+  }
+
+
+
+
+const adminToken = "<%= token %>";
+  localStorage.setItem("adminToken", adminToken);
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

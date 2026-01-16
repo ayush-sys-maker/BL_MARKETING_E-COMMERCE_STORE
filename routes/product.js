@@ -14,43 +14,54 @@ router.get("/", async (req, res) => {
     }
 })
 
-// Detail route - should come after
+// Detail route - should come after,
 router.get("/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id)
+        const error = req.query.error || null
         
-        // Validate ID
         if (isNaN(id)) {
             return res.status(400).send('Invalid product ID')
         }
 
-        const product = await productRepository.getProductById(id)
-        
+        let product = await productRepository.getProductById(id)
+
         if (!product) {
             return res.status(404).send('Product not found')
         }
 
-        // Process colors and sizes
-        if(product.color){
-            product.colors = product.color.split(",").map(color => color.trim())
-        } else {
-            product.colors = []
-        }
-        
-        if(product.size){
-            product.sizes = product.size.split(",").map(size => size.trim())
-        } else {
-            product.sizes = ["S","M","L","XL"]
-        }
+        // Colors
+        product.colors = product.color
+            ? product.color.split(",").map(c => c.trim())
+            : []
+
+        // Sizes
+        product.sizes = product.size
+            ? product.size.split(",").map(s => s.trim())
+            : ["S","M","L","XL"]
+
+        // IMAGES PARSING (correct handling for PostgreSQL format)
+        if (product.images && typeof product.images === 'string') {
+    let cleaned = product.images.replace(/[{}]/g, '');
+    cleaned = cleaned.replace(/""/g, '"').replace(/"/g, '');
+    cleaned = cleaned.replace(/\\/g, '/');     // Convert backslashes
+    cleaned = cleaned.replace(/\/+/g, '/');    // Normalize slashes
+    product.images = cleaned.split(',').map(img => img.trim());
+} else {
+    product.images = [];
+}
+
+        console.log("PARSED IMAGES:", product.images)
 
         res.render('page/product', {
-            title: `${product.name}`,
-            product
+            title: product.name,
+            product,
+            error
         })
+
     } catch (error) {
         console.log(error)
         res.status(500).send('Server error')
     }
 })
-
 export default router

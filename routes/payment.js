@@ -29,7 +29,11 @@ if(!user_id){
     return res.send("Please login to checkout")
 }
 const cartitems = await productRepository.getCart(user_id)
-const total = cartitems.reduce((sum, item) => sum + (Number(item.price) || 0), 0);
+const total = cartitems.reduce(
+  (sum, item) =>
+    sum + (Number(item.price) || 0) * (Number(item.quantity) || 1),
+  0
+);
 
 const address = await productRepository.getaddress(user_id)
 

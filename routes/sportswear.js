@@ -10,9 +10,22 @@ router.get("/",async(req,res)=>{
     try{
         let product = await productRepository.getProductsByCategory("Sportswear");
 
+           product = product.map(p => {
+      if (typeof p.images === 'string') {
+        // Remove { } and parse into array
+        let cleaned = p.images.replace(/[{}]/g, '');
+        // Split by comma if multiple
+        let arr = cleaned.split(',').map(item => item.replace(/"/g, '').replace(/\\/g, '/'));
+        p.images = arr;
+      }
+      return p;
+    });
+
+    
+
         product = product.sort((a,b) => a.id - b.id);
 
-    res.render('page/sportswear',{feature:product.slice(0,8)});
+    res.render('page/sportswear',{feature:product.slice(0,15)});
 
 
     }catch(error){

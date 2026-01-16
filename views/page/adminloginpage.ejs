@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BL | ADMIN-LOGIN-PAGE</title>
+
+    <style>
+        /* Wrapper centers the form fullscreen */
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f2f6ff;
+  padding: 20px;
+}
+
+/* Login card */
+#adminLoginForm {
+  width: 350px;
+  padding: 32px 28px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-family: "Inter", "Roboto", sans-serif;
+}
+
+/* Title */
+.login-title {
+  text-align: center;
+  margin-bottom: 8px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Input fields */
+#adminLoginForm input {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d0d7e2;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+#adminLoginForm input:focus {
+  border-color: #3b82f6;
+}
+
+/* Login button */
+.login-btn {
+  margin-top: 6px;
+  padding: 12px;
+  background: #3b82f6;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.login-btn:hover {
+  background: #1e60d4;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  #adminLoginForm {
+    width: 100%;
+    max-width: 320px;
+    padding: 28px 22px;
+  }
+}
+
+    </style>
+</head>
+<body>
+    
+<form id="adminLoginForm">
+  <input type="username" id="email" placeholder="Email"  autocomplete="new-username">
+  <input type="password" id="password" placeholder="Password"  autocomplete="new-password">
+  <button type="submit">Login</button>
+</form>
+
+
+
+
+
+
+
+
+
+<script>
+document.getElementById("adminLoginForm").addEventListener("submit", async (e)=>{
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+
+  const res = await fetch("/admin-auth/login", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify({ email, password: pass })
+  });
+
+  const data = await res.json();
+  if (data.token){
+     window.location.href="/admin?token=" + data.token;
+  } else {
+    alert("Invalid credentials");
+  }
+});
+</script>
+</body>
+
+
+
+</html>

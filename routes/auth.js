@@ -58,8 +58,14 @@ router.post("/login", async (req, res) => {
         if (rows.length === 0) {
             return res.status(401).send("Invalid username or password");
         }
-        
+
         const user = rows[0];
+
+    if (user.is_deleted === true) {
+        return res.status(403).send("Account has been deleted");
+    }
+        
+       
         const validPassword = bcrypt.compareSync(password, user.password);
         
         if (!validPassword) {

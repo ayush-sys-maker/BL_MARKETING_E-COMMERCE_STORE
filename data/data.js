@@ -1,24 +1,34 @@
 import dotenv from "dotenv";
 import pkg from "pg";
 
-const { Pool } = pkg;
 dotenv.config();
+const { Pool } = pkg;
+
+const isProduction = process.env.NODE_ENV === "production";
 
 const data = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
+  connectionString: isProduction
+    ? process.env.DATABASE_URL        // Neon / Render
+    : process.env.LOCAL_DATABASE_URL, // Local PostgreSQL
+
+  ssl: isProduction
+    ? { rejectUnauthorized: false }   // Cloud DBs
+    : false                           // Local DB
 });
 
-// Force schema for every new connection (CRITICAL FIX)
+// Optional: force schema (safe for both)
 data.on("connect", async (client) => {
   await client.query("SET search_path TO public");
 });
 
-// One-time startup test (safe)
+// One-time startup test
 (async () => {
   try {
     const client = await data.connect();
-    console.log("✅ Successfully connected to Neon PostgreSQL");
+    console.log(
+      "✅ Successfully connected to",
+      isProduction ? "Production PostgreSQL" : "Local PostgreSQL"
+    );
     client.release();
   } catch (err) {
     console.error("❌ Database connection error:", err.message);
