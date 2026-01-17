@@ -72,19 +72,11 @@ const AllProducts = await productRepository.getAllProducts();
 
 router.get("/delete_user/:id",async(req, res) => {
 
-  const token = req.query.token;
-
-  if (!token) {
-    return res.status(401).send('Access denied. No token provided.');
-  }
-
+  
 try {
 
 
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);  
-    if (decoded.role !== "admin") {
-      return res.status(403).send("Not authorized");
-    }
+   
 
 await productRepository.deleteUserById(req.params.id);
 
