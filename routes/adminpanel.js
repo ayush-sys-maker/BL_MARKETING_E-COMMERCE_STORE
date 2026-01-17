@@ -70,7 +70,7 @@ const AllProducts = await productRepository.getAllProducts();
 
 
 
-router.get("/delete_user/:id",adminAuth,async(req, res) => {
+router.get("/delete_user/:id",async(req, res) => {
 
   const token = req.query.token;
 
@@ -104,7 +104,7 @@ res.redirect("/admin");
 });
 
 
-router.get("/delete_product/:id", adminAuth,  async(req, res) => {
+router.get("/delete_product/:id",  async(req, res) => {
 
 
     try {
@@ -126,7 +126,7 @@ router.get("/delete_product/:id", adminAuth,  async(req, res) => {
 
 } )
 
-router.post("/add_product", adminAuth, upload.array('images', 10), async (req, res) => {
+router.post("/add_product",  upload.array('images', 10), async (req, res) => {
   try {
     const { Pname, category, price, size, color, description, discounted_price } = req.body;
 
