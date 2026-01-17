@@ -2,7 +2,6 @@ import express from "express";
 import Razorpay from "razorpay";
 import crypto from "crypto";
 import productRepository from "../data/dashboard.js";
-import items from "razorpay/dist/types/items.js";
 
 const router = express.Router();
 
@@ -57,9 +56,6 @@ let img = item.images
 
 return item
 }
-
-
-
 
 )
 
