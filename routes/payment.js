@@ -2,6 +2,7 @@ import express from "express";
 import Razorpay from "razorpay";
 import crypto from "crypto";
 import productRepository from "../data/dashboard.js";
+import items from "razorpay/dist/types/items.js";
 
 const router = express.Router();
 
@@ -28,7 +29,7 @@ router.get("/checkout", async (req, res) => {
 if(!user_id){
     return res.send("Please login to checkout")
 }
-const cartitems = await productRepository.getCart(user_id)
+let cartitems = await productRepository.getCart(user_id)
 const total = cartitems.reduce(
   (sum, item) =>
     sum + (Number(item.price) || 0) * (Number(item.quantity) || 1),
@@ -36,6 +37,38 @@ const total = cartitems.reduce(
 );
 
 const address = await productRepository.getaddress(user_id)
+
+
+
+cartitems.map((item)=>{
+
+let img = item.images
+
+
+  img = img.replace(/[{}]/g, "");
+
+  // remove escaped slashes
+  img = img.replace(/\\\\/g, "/");
+
+  // remove quotes
+  img = img.replace(/"/g, "");
+
+  item.images = img; // single string path
+
+return item
+}
+
+
+
+
+)
+
+
+
+
+
+
+
 
 
 console.log(cartitems);
