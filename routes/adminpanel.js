@@ -70,17 +70,29 @@ const AllProducts = await productRepository.getAllProducts();
 
 
 
-router.get("/delete_user/:id",async(req, res) => {
+router.post("/delete_user/:id", adminAuth  , async(req, res) => {
+
+  console.log("QUERY:", req.body);
+
+const token = req.body.token;
+
+if(!token ){0
+  return res.status(401).send("NO TOKEN")
+}
 
   
 try {
 
 
-   
+  const decoded = jwt.verify(token,process.env.JWT_SECRET)
+
+   if (decoded.role !== "admin"){
+    return res.status(401).send("ACCESS IS ONLY FOR ADMINS")
+   }
 
 await productRepository.deleteUserById(req.params.id);
 
-res.redirect("/admin");
+res.redirect(`/admin?token=${token}`);
 
 
     
@@ -96,10 +108,25 @@ res.redirect("/admin");
 });
 
 
-router.get("/delete_product/:id",  async(req, res) => {
+router.post("/delete_product/:id", adminAuth,  async(req, res) => {
+
+  console.log("QUERY:", req.body);
+
+const token = req.body.token;
+
+if(!token ){0
+  return res.status(401).send("NO TOKEN")
+}
+
 
 
     try {
+
+      const decoded = jwt.verify(token,process.env.JWT_SECRET)
+
+   if (decoded.role !== "admin"){
+    return res.status(401).send("ACCESS IS ONLY FOR ADMINS")
+   }
 
     await productRepository.deleteProduct(req.params.id);
     

@@ -14,10 +14,9 @@ export function adminAuth(req, res, next) {
     token = req.query.token;
   }
 
-  // 3. Try request body
-  if (!token && req.body.token) {
-    token = req.body.token;
-  }
+if (!token && req.body && req.body.token) {
+  token = req.body.token;
+}
 
   // If no token anywhere
   if (!token) return res.status(401).send("Access Denied: No Token");

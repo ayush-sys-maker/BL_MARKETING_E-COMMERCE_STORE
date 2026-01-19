@@ -655,7 +655,6 @@
 </head>
 <body>
 
- 
 <!--NAVBAR--> 
 <header class="sticky-top bg-white shadow-sm">
     <nav class="navbar navbar-expand-lg container ">
@@ -863,9 +862,10 @@
 
   <!-- Action -->
   <div class="user-action">
-    <form action="/admin/delete_user/<%= user.id %>"  method="get"  >
-    <button class="block-btn">Block</button>
-    </form>
+<form action="/admin/delete_user/<%= user.id %>" method="post">
+  <input type="hidden" name="token" value="<%= token %>">
+  <button class="block-btn">Block</button>
+</form>
   </div>
 </div>
 
@@ -914,7 +914,9 @@
 
   <!-- Delete Action -->
   <div class="product-action">
-    <form action="/admin/delete_product/<%= product.id %>"  method="get"  >
+    <form action="/admin/delete_product/<%= product.id %>"  method="post"  >
+        <input type="hidden" name="token" value="<%= token %>">
+
     <button class="delete-btn" title="Delete Product">✕</button>
     </form>
   </div>
