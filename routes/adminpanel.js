@@ -110,7 +110,7 @@ res.redirect(`/admin?token=${token}`);
 
 router.post("/delete_product/:id", adminAuth,  async(req, res) => {
 
-  console.log("QUERY:", req.body);
+  console.log("body:", req.body);
 
 const token = req.body.token;
 
@@ -130,7 +130,7 @@ if(!token ){0
 
     await productRepository.deleteProduct(req.params.id);
     
-    res.redirect("/admin");
+    res.redirect(`/admin?token=${token}`);
 
         
     } catch (error) {
@@ -145,8 +145,29 @@ if(!token ){0
 
 } )
 
-router.post("/add_product",  upload.array('images', 10), async (req, res) => {
+router.post("/add_product",  upload.array('images', 10),adminAuth, async (req, res) => {
+
+  
+  console.log("body:", req.body);
+
+const token = req.body.token;
+
+if(!token ){0
+  return res.status(401).send("NO TOKEN")
+}
+
   try {
+
+
+      const decoded = jwt.verify(token,process.env.JWT_SECRET)
+
+   if (decoded.role !== "admin"){
+    return res.status(401).send("ACCESS IS ONLY FOR ADMINS")
+   }
+
+
+
+
     const { Pname, category, price, size, color, description, discounted_price } = req.body;
 
     // Get array of uploaded image paths
@@ -156,7 +177,7 @@ router.post("/add_product",  upload.array('images', 10), async (req, res) => {
       Pname, category,description, price, color,size,images,discounted_price  
     );
 
-    res.redirect("/admin");
+    res.redirect(`/admin?token=${token}`);
   } catch (error) {
     console.error("ADD PRODUCT ERROR 👇");
     console.error(error);

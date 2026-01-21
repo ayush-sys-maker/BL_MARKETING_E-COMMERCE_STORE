@@ -131,10 +131,24 @@
         </tbody>
       </table>
 
+      <p> <Address> 
+      
+       <% if (address) { %>
+  <strong><%= address.firstname %></strong><br>
+  <%= address.street_address %><br>
+  <%= address.city %><br>
+  <%= address.state %><br>
+  Phone: <%= address.phone_number %><br>
+<% } else { %>
+  <em>No address found</em>
+<% } %>
+      
+    
+      </Address></p>
+
       <!-- Summary -->
       <p><strong>Total Amount:</strong> ₹<%= viewOrder.total_amount %></p>
-      <p><strong>Payment Status:</strong> <span class="badge bg-success"><%= viewOrder.payment_status %></span></p>
-      <p><strong>Payment Method:</strong> <%= viewOrder.payment_method %></p>
+      <p><strong>Payment Method:</strong> <span class="badge bg-success"><%= viewOrder.payment_status %></span></p>
       <p><strong>Expected Delivery:</strong> <%= new Date(viewOrder.items[0].delivery_date).toLocaleDateString() %></p>    </div>
   </div>
 </div>

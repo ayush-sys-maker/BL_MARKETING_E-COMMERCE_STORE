@@ -927,6 +927,7 @@
 
 </div>
 <form action="/admin/add_product" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="token" value="<%= token %>">
 <div class="product-form-wrapper">
 
   <!-- LEFT: Image Upload Box -->

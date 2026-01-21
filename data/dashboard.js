@@ -278,7 +278,7 @@ FROM public.orders o
 JOIN public.user_table u ON o.user_id = u.id
 Join public.order_items oi ON o.id = oi.order_id
 ORDER BY o.id, o.order_date DESC
-LIMIT 5;
+LIMIT 100;
 ;`
     );
     return rows;

@@ -38,9 +38,25 @@ const order_id = req.params.id;
                 o.order_date DESC
         `, [order_id]);
 
+
+const addressResult = await data.query(
+    `
+    select firstname, street_address, city, state, phone_number from public.address
+    where  user_id = (select user_id from public.orders where id = $1)
+    `,
+    [order_id]
+);
+    
+const address= addressResult.rows[0] || null;
+
+
+
+
+
+
         const viewOrder = rows[0];
 
-          res.render("page/view",{viewOrder}  );
+          res.render("page/view",{viewOrder,address}  );
         
     } catch (error) {
         console.error("VIEW ORDER ERROR 👇");
